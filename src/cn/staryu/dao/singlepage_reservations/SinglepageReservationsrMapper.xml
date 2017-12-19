@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.staryu.dao.news_atricles.NewsArticlesMapper">
+<!-- ————————————————————————————————resultMap区————————————————————————————  -->
+	
+<!--——————————————————————————————————增 ———————————————————————————————————————————————— -->
+	<insert id="addSinglepageReservations" parameterType="SinglepageReservations">
+		INSERT INTO singlepage_reservations(enrolment, name, age, email, phone, information)
+		VALUES(#{enrolment},#{name},#{age},#{email},#{phone},#{information})
+	</insert>
+<!--——————————————————————————————————删 ———————————————————————————————————————————————— -->
+	<delete id="delSinglepageReservationsByid" parameterType="Integer">
+		DELETE FROM singlepage_reservations WHERE id=#{id}
+	</delete>
+<!--——————————————————————————————————改 ———————————————————————————————————————————————— -->
+	<update id="updateSinglepageReservations" parameterType="SinglepageReservations">
+		UPDATE singlepage_reservations SET `enrolment`=#{enrolment},name=#{name},
+			age=#{age},email=#{email},phone=#{phone},information=#{information}
+		where id=#{id}
+	</update>
+<!--——————————————————————————————————查 ———————————————————————————————————————————————— -->
+	<!--根据id查找-->
+	<select id="findSinglepageReservationsByid" parameterType="Integer">
+		SELECT * FROM singlepage_reservations WHERE id=#{id}
+	</select>
+
+	<!--根据名字、地址模糊查找-->
+	<select id="findSinglepageReservationsInfo" parameterType="SinglepageReservations">
+		SELECT * FROM singlepage_reservations
+		<where>
+			<if test="enrolment != null and enrolment != ''">AND `enrolment` LIKE CONCAT('%',#{enrolment},'%')</if>
+			<if test="name != null and name != ''">AND `name` LIKE CONCAT('%',#{name},'%')</if>
+		</where>
+	</select>
+<!-- ————————————————————————————————cache配置————————————————————————————  -->
+	<cache eviction="FIFO" flushInterval="60000" size="512"  readOnly="true"/>
+</mapper>
