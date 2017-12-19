@@ -2,6 +2,7 @@ package cn.staryu.service.linkmanager;
 
 import cn.staryu.dao.linkmanager.LinkmanagerMapper;
 import cn.staryu.pojo.Linkmanager;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.List;
  * @author zwy
  * 2017/12/19 下午 3:38
  */
+@Service("linkmanagerService")
 public class LinkmanagerServiceImpl implements LinkmanagerService {
     private LinkmanagerMapper linkmanagerMapper;
 

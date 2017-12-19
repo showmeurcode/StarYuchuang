@@ -2,6 +2,7 @@ package cn.staryu.service.singlepage_reservations;
 
 import cn.staryu.dao.singlepage_reservations.SinglepageReservationsMapper;
 import cn.staryu.pojo.SinglepageReservations;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.List;
  * @author zwy
  * 2017/12/19 下午 3:43
  */
+@Service("singlepageReservationsService")
 public class SinglepageReservationsServiceImpl implements SinglepageReservationsService {
     private SinglepageReservationsMapper singlepageReservationsMapper;
 
