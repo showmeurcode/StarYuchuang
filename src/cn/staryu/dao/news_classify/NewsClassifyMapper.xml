@@ -7,42 +7,37 @@
 	
 <!--——————————————————————————————————增 ———————————————————————————————————————————————— -->
 
-	<!-- 添加文章 -->
-	<insert id="addArticles" parameterType="NewsArticles">
-		INSERT INTO `news_articles` (`title`, `author`, `classifyId`, `puttime`, `count`, `content`, `picture`)
-		VALUES (#{title}, #{author}, #{classifyId}, #{puttime}, #{count},#{content},#{picture})
+	<!-- 添加分类 -->
+	<insert id="addClassify" parameterType="NewsClassify">
+		INSERT INTO `news_classify` (`id`, `name`) VALUES (#{id}, #{name})
 	</insert>
 
 <!--——————————————————————————————————删 ———————————————————————————————————————————————— -->
 
-	<!-- 根据id删除文章 -->
-	<delete id="delArticles" parameterType="Integer">
-		DELETE FROM `news_articles` WHERE `id`=#{id}
+	<!-- 根据id删除分类 -->
+	<delete id="delClassify" parameterType="Integer">
+		DELETE FROM `news_classify` WHERE `id`=#{id}
 	</delete>
 
 <!--——————————————————————————————————改 ———————————————————————————————————————————————— -->
 
-	<!-- 修改文章 -->
-	<update id="updateArticles" parameterType="NewsArticles">
-		UPDATE `news_articles` SET `title`=#{title},`author`=#{author},`classifyId`=#{classifyId},
-			`puttime`=#{puttime}, `count`=#{count}, `content`=#{content}, `picture`=#{picture}
-		WHERE `id`=#{id}
+	<!-- 修改分类 -->
+	<update id="updateClassify" parameterType="NewsClassify">
+		UPDATE `news_classify` SET `name`=#{name} WHERE `id`=#{id}
 	</update>
 
 <!--——————————————————————————————————查 ———————————————————————————————————————————————— -->
 
-	<!-- 根据id查询单个文章 -->
-	<select id="findArticlesById" resultType="NewsArticles" parameterType="Integer">
-		SELECT * FROM `news_articles` WHERE  `id`=#{id}
+	<!-- 根据id查询单个分类 -->
+	<select id="findClassifyById" resultType="NewsClassify" parameterType="Integer">
+		SELECT * FROM `news_classify` WHERE  `id`=#{id}
 	</select>
 
-	<!-- 根据分类id查询,文章名称模糊查询,作者模糊查询,查询全部文章 -->
-	<select id="findArticlesByInfo" parameterType="NewsArticles" resultType="NewsArticles">
-		SELECT * FROM `news_articles`
+	<!-- 根据条件查找分类集合 -->
+	<select id="findClassifyByInfo" parameterType="NewsClassify" resultType="NewsClassify">
+		SELECT * FROM `news_classify`
 		<where>
-			<if test="classifyId != null and classifyId != ''">AND `classifyId`=#{classifyId}</if>
-			<if test="title != null and title != ''">AND `title` LIKE CONCAT('%',#{title},'%')</if>
-			<if test="author != null and author != ''">AND `author` LIKE CONCAT('%',#{author},'%')</if>
+			<if test="name != null and name != ''">AND `name` LIKE CONCAT('%',#{name},'%')</if>
 		</where>
 	</select>
 
