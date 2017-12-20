@@ -84,6 +84,11 @@ public class NewsClassifyController {
         }
     }
 
+    /**
+     * 显示所有新闻分类列表
+     * @param model
+     * @return
+     */
     @RequestMapping("/showClassify")
     public String showAllClassify(Model model){
         NewsClassify newsClassify = new NewsClassify();
@@ -97,6 +102,13 @@ public class NewsClassifyController {
         return "新闻分类列表";
     }
 
+    /**
+     * 新闻分类修改页面
+     * @param model
+     * @param id
+     * @return
+     */
+    @RequestMapping("/update")
     public String updatePage(Model model,String id){
         NewsClassify newsClassify = null;
         try {

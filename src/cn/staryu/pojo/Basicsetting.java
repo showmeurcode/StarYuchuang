@@ -1,16 +1,16 @@
 package cn.staryu.pojo;
 
 public class Basicsetting {
-  private Long id;//编号
+  private Integer id;//编号
   private String name;//网络名称
   private String adress;//网络地址
   private String describe;//站点描述
 
-  public Long getId() {
+  public Integer getId() {
     return id;
   }
 
-  public void setId(Long id) {
+  public void setId(Integer id) {
     this.id = id;
   }
 

@@ -1,15 +1,15 @@
 package cn.staryu.pojo;
 
 public class Linkmanager {
-  private Long id;//编号
+  private Integer id;//编号
   private String name;//网站名称
   private String link;//网站链接
 
-  public Long getId() {
+  public Integer getId() {
     return id;
   }
 
-  public void setId(Long id) {
+  public void setId(Integer id) {
     this.id = id;
   }
 
