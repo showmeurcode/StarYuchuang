@@ -4,6 +4,7 @@ import cn.staryu.dao.singlepage_reservations.SinglepageReservationsMapper;
 import cn.staryu.pojo.SinglepageReservations;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +14,7 @@ import java.util.List;
  */
 @Service("singlepageReservationsService")
 public class SinglepageReservationsServiceImpl implements SinglepageReservationsService {
+    @Resource
     private SinglepageReservationsMapper singlepageReservationsMapper;
 
     @Override

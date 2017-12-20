@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.staryu.dao.news_atricles.NewsArticlesMapper">
+<mapper namespace="cn.staryu.dao.singlepage_reservations.SinglepageReservationsMapper">
 <!-- ————————————————————————————————resultMap区————————————————————————————  -->
 	
 <!--——————————————————————————————————增 ———————————————————————————————————————————————— -->
@@ -22,12 +22,12 @@
 	</update>
 <!--——————————————————————————————————查 ———————————————————————————————————————————————— -->
 	<!--根据id查找-->
-	<select id="findSinglepageReservationsByid" parameterType="Integer">
+	<select id="findSinglepageReservationsByid" parameterType="Integer" resultType="SinglepageReservations">
 		SELECT * FROM singlepage_reservations WHERE id=#{id}
 	</select>
 
 	<!--根据名字、地址模糊查找-->
-	<select id="findSinglepageReservationsInfo" parameterType="SinglepageReservations">
+	<select id="findSinglepageReservationsInfo" parameterType="SinglepageReservations" resultType="SinglepageReservations">
 		SELECT * FROM singlepage_reservations
 		<where>
 			<if test="enrolment != null and enrolment != ''">AND `enrolment` LIKE CONCAT('%',#{enrolment},'%')</if>

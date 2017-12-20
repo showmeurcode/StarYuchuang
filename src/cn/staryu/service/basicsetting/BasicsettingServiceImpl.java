@@ -4,6 +4,7 @@ import cn.staryu.dao.basicsetting.BasicsettingMapper;
 import cn.staryu.pojo.Basicsetting;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +14,7 @@ import java.util.List;
  */
 @Service("basicsettingService")
 public class BasicsettingServiceImpl implements BasicsettingService{
+    @Resource
     private BasicsettingMapper basicsettingMapper;
 
     @Override

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.staryu.dao.news_atricles.NewsArticlesMapper">
+<mapper namespace="cn.staryu.dao.basicsetting.BasicsettingMapper">
 <!-- ————————————————————————————————resultMap区————————————————————————————  -->
 	
 <!--——————————————————————————————————增 ———————————————————————————————————————————————— -->
@@ -21,12 +21,12 @@
 	</update>
 <!--——————————————————————————————————查 ———————————————————————————————————————————————— -->
 	<!--根据id查找-->
-	<select id="findBasicsettingByid" parameterType="Integer">
+	<select id="findBasicsettingByid" parameterType="Integer" resultType="Basicsetting">
 		SELECT * FROM basicsetting WHERE id=#{id}
 	</select>
 
 	<!--根据名字、地址模糊查找-->
-	<select id="findBasicsettingsByinfo" parameterType="Basicsetting">
+	<select id="findBasicsettingsByinfo" parameterType="Basicsetting" resultType="Basicsetting">
 		SELECT * FROM basicsetting
 		<where>
 			<if test="name != null and name != ''">AND `name` LIKE CONCAT('%',#{name},'%')</if>

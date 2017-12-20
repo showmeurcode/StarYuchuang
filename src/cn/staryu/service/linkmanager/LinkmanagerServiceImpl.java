@@ -4,6 +4,7 @@ import cn.staryu.dao.linkmanager.LinkmanagerMapper;
 import cn.staryu.pojo.Linkmanager;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +14,7 @@ import java.util.List;
  */
 @Service("linkmanagerService")
 public class LinkmanagerServiceImpl implements LinkmanagerService {
+    @Resource
     private LinkmanagerMapper linkmanagerMapper;
 
     @Override
