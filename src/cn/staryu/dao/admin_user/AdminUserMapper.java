@@ -17,6 +17,8 @@ public interface AdminUserMapper {
     int deleteUser(@Param("id")Integer id) throws Exception;
     //更新用户信息
     int updateUser(AdminUser adminUser);
+    //根据用户id获取用户信息
+    AdminUser findUserById(@Param("id")Integer id)throws Exception;
     //根据用户名称查找用户是否存在
     AdminUser findUserByname(String adminName) throws Exception;
 

@@ -43,6 +43,11 @@ public class  AdminUserServiceImpl implements AdminUserService {
     }
 
     @Override
+    public AdminUser findUserById(Integer id) throws Exception {
+        return adminUserMapper.findUserById(id);
+    }
+
+    @Override
     public AdminUser findUserByname(String adminName) throws Exception {
         return adminUserMapper.findUserByname(adminName);
     }

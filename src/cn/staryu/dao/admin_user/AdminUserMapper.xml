@@ -57,7 +57,15 @@
     <select id="findAllBackendUser" resultType="cn.staryu.pojo.AdminUserr">
         SELECT * FROM admin_user
     </select>
-    <select id="findAllAdminUser" resultType="cn.staryu.pojo.AdminUser"></select>
+    <select id="findAllAdminUser" resultType="cn.staryu.pojo.AdminUser">
+        SELECT * FROM admin_user
+    </select>
+
+    <select id="findUserById" resultType="cn.staryu.pojo.AdminUser">
+
+        SELECT * FROM admin_user WHERE id=#{id}
+
+    </select>
 
     <!-- ————————————————————————————————cache配置————————————————————————————  -->
     <cache eviction="FIFO" flushInterval="60000" size="512"  readOnly="true"/>

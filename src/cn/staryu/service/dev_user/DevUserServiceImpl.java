@@ -43,6 +43,12 @@ public class DevUserServiceImpl implements DevUserService {
     }
 
     @Override
+    public DevUser findUserById(Integer id) throws Exception {
+
+        return devUserMapper.findUserById(id);
+    }
+
+    @Override
     public DevUser findUserByname(String devName) throws Exception {
 
         return devUserMapper.findUserByname(devName);
