@@ -59,10 +59,10 @@ public class BasicsettingController {
     //删除
     @RequestMapping("/delBasicsetting")
     @ResponseBody
-    public Object delBasicsetting(int id){
+    public Object delBasicsetting(String id){
         int result=0;
         try {
-            result=basicsettingService.delBasicsettingByid(id);
+            result=basicsettingService.delBasicsettingByid(Integer.valueOf(id));
         } catch (Exception e) {
             e.printStackTrace();
         }

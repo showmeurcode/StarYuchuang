@@ -59,10 +59,10 @@ public class SinglepageReservationsController {
     //删除
     @RequestMapping("/delSinglepageReservationsg")
     @ResponseBody
-    public Object delSinglepageReservationsg(int id){
+    public Object delSinglepageReservationsg(String id){
         int result=0;
         try {
-            result=singlepageReservationsService.delSinglepageReservationsByid(id);
+            result=singlepageReservationsService.delSinglepageReservationsByid(Integer.valueOf(id));
         } catch (Exception e) {
             e.printStackTrace();
         }

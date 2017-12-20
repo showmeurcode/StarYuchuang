@@ -59,10 +59,10 @@ public class LinkmanagerController {
     //删除
     @RequestMapping("/delLinkmanager")
     @ResponseBody
-    public Object delLinkmanager(int id){
+    public Object delLinkmanager(String id){
         int result=0;
         try {
-            result=linkmanagerService.delLinkmanagerByid(id);
+            result=linkmanagerService.delLinkmanagerByid(Integer.valueOf(id));
         } catch (Exception e) {
             e.printStackTrace();
         }
