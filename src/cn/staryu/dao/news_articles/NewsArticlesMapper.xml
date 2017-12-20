@@ -40,7 +40,7 @@
 	<select id="findArticlesByInfo" parameterType="NewsArticles" resultType="NewsArticles">
 		SELECT * FROM `news_articles`
 		<where>
-			<if test="classifyId != null and classifyId != ''">AND `classifyId`=#{classifyId}</if>
+			<if test="classifyId != 0 and classifyId != ''">AND `classifyId`=#{classifyId}</if>
 			<if test="title != null and title != ''">AND `title` LIKE CONCAT('%',#{title},'%')</if>
 			<if test="author != null and author != ''">AND `author` LIKE CONCAT('%',#{author},'%')</if>
 		</where>
