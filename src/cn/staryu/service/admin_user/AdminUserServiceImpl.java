@@ -2,6 +2,7 @@ package cn.staryu.service.admin_user;
 
 import cn.staryu.dao.admin_user.AdminUserMapper;
 import cn.staryu.pojo.AdminUser;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ import java.util.List;
  * @author kongxiangzhong
  * 2017/12/19 15:43
  */
+@Service("adminUserService")
 public class  AdminUserServiceImpl implements AdminUserService {
 
     @Resource

@@ -2,6 +2,7 @@ package cn.staryu.service.dev_user;
 
 import cn.staryu.dao.dev_user.DevUserMapper;
 import cn.staryu.pojo.DevUser;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ import java.util.List;
  * @author kongxiangzhong
  * 2017/12/19 10:39
  */
+@Service("devUserService")
 public class DevUserServiceImpl implements DevUserService {
 
     @Resource
