@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.staryu.dao.admin_user.AdminUserMapper">
+    <!-- ————————————————————————————————resultMap区————————————————————————————  -->
+
+    <!--——————————————————————————————————增 ———————————————————————————————————————————————— -->
+    <insert id="addUser" parameterType="AdmindUser">
+
+        INSERT  INTO admin_user (`adminName`,`adminPassword`,`phone`,`jurisdiction`,`registerDate`)
+
+        VALUES (#{adminName},#{adminPassword},#{phone},#{jurisdiction},#{registerDate})
+
+    </insert>
+
+    <!--——————————————————————————————————删 ———————————————————————————————————————————————— -->
+    <delete id="deleteUser" parameterType="AdminUserr">
+
+        DELETE FROM admin_user WHERE id=#{id}
+
+    </delete>
+
+    <!--——————————————————————————————————改 ———————————————————————————————————————————————— -->
+    <!--更新用户信息 -->
+    <update id="updateUser" parameterType="AdminUserr">
+
+        UPDATE  admin_user
+        <set>
+            <if test="adminName != null">adminName=#{adminName},</if>
+            <if test="adminPassword != null">adminPassword=#{adminPassword},</if>
+            <if test="phone != null">phone=#{phone},</if>
+            <if test="jurisdiction != null">jurisdiction=#{jurisdiction},</if>
+            <if test="registerDate != null">registerDate=#{registerDate},</if>
+
+        </set>
+
+        WHERE  id = #{id}
+
+
+    </update>
+
+    <!--——————————————————————————————————查 ———————————————————————————————————————————————— -->
+
+    <select id="findUserByname" resultType="cn.staryu.pojo.AdminUser">
+        SELECT * FROM  admin_user WHERE adminName=#{adminName};
+
+    </select>
+
+
+
+    <!-- 验证登录-->
+    <select id="findLoginUser" resultType="cn.staryu.pojo.AdminUser">
+        select * from admin_user u
+        WHERE u.adminName=#{adminName}  and u.adminPassword = #{adminPassword}
+    </select>
+    <select id="findAllBackendUser" resultType="cn.staryu.pojo.AdminUserr">
+        SELECT * FROM admin_user
+    </select>
+    <select id="findAllAdminUser" resultType="cn.staryu.pojo.AdminUser"></select>
+
+    <!-- ————————————————————————————————cache配置————————————————————————————  -->
+    <cache eviction="FIFO" flushInterval="60000" size="512"  readOnly="true"/>
+</mapper>

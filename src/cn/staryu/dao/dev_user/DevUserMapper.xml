@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.staryu.dao.dev_user.DevUserMapper">
+    <!-- ————————————————————————————————resultMap区————————————————————————————  -->
+
+    <!--——————————————————————————————————增 ———————————————————————————————————————————————— -->
+
+    <insert id="addUser" parameterType="DevUser">
+        INSERT  INTO  dev_user(devName,devPassword,phone,qq,devEmail,jurisdiction,registerDate)
+
+        VALUES (#{devName},#{devPassword},#{phone},#{qq},#{devEmail},#{jurisdiction},#{registerDate})
+
+
+    </insert>
+
+    <!--——————————————————————————————————删 ———————————————————————————————————————————————— -->
+    <delete id="deleteUser" parameterType="DevUser">
+
+        DELETE FROM dev_user WHERE  id=#{id}
+
+
+    </delete>
+
+    <!--——————————————————————————————————改 ———————————————————————————————————————————————— -->
+    <update id="updateUser" parameterType="DevUser">
+        UPDATE dev_user
+        <set>
+
+            <if test="devName != null">devName=#{devName},</if>
+            <if test="devPassword != null">devPassword=#{devPassword},</if>
+            <if test="phone != null">phone=#{phone},</if>
+            <if test="qq != null">qq=#{qq},</if>
+            <if test="devEmail != null">devEmail=#{devEmail},</if>
+            <if test="jurisdiction != null">jurisdiction=#{jurisdiction},</if>
+            <if test="registerDate != null">registerDate=#{registerDate},</if>
+
+        </set>
+
+    </update>
+    <!--——————————————————————————————————查 ———————————————————————————————————————————————— -->
+    <select id="findUserByname" parameterType="DevUser" resultType="cn.staryu.pojo.DevUser">
+
+        SELECT * FROM  dev_user WHERE devName=#{devName};
+
+    </select>
+
+
+
+    <!-- 验证登录-->
+    <select id="findLoginUser" resultType="DevUser">
+        SELECT * FROM dev_user u
+
+        WHERE u.devCode = #{devName} and u.devPassword=#{devPassword}
+
+    </select>
+
+    <select id="findAllDevUser" resultType="DevUser">
+
+        SELECT * FROM dev_user
+
+    </select>
+
+    <!-- ————————————————————————————————cache配置————————————————————————————  -->
+    <cache eviction="FIFO" flushInterval="60000" size="512"  readOnly="true"/>
+</mapper>
