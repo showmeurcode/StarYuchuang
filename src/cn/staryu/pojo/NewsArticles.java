@@ -9,7 +9,7 @@ public class NewsArticles {
     private String author;
     private Integer classifyid;
     private Date puttime;
-    private Long count;
+    private Integer count;
     private String content;
     private String picture;
 
@@ -53,11 +53,11 @@ public class NewsArticles {
         this.puttime = puttime;
     }
 
-    public Long getCount() {
+    public Integer getCount() {
         return count;
     }
 
-    public void setCount(Long count) {
+    public void setCount(Integer count) {
         this.count = count;
     }
 
