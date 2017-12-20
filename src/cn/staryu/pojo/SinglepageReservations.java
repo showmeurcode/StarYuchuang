@@ -1,19 +1,19 @@
 package cn.staryu.pojo;
 
 public class SinglepageReservations {
-  private Long id;//编号
+  private Integer id;//编号
   private String enrolment;//报名对象
   private String name;//姓名
-  private Long age;//年龄
+  private Integer age;//年龄
   private String email;//邮箱
-  private Long phone;//电话
+  private Integer phone;//电话
   private String information;//是否信息已回访
 
-  public Long getId() {
+  public Integer getId() {
     return id;
   }
 
-  public void setId(Long id) {
+  public void setId(Integer id) {
     this.id = id;
   }
 
@@ -33,11 +33,11 @@ public class SinglepageReservations {
     this.name = name;
   }
 
-  public Long getAge() {
+  public Integer getAge() {
     return age;
   }
 
-  public void setAge(Long age) {
+  public void setAge(Integer age) {
     this.age = age;
   }
 
@@ -49,11 +49,11 @@ public class SinglepageReservations {
     this.email = email;
   }
 
-  public Long getPhone() {
+  public Integer getPhone() {
     return phone;
   }
 
-  public void setPhone(Long phone) {
+  public void setPhone(Integer phone) {
     this.phone = phone;
   }
 
