@@ -97,4 +97,15 @@ public class NewsClassifyController {
         return "新闻分类列表";
     }
 
+    public String updatePage(Model model,String id){
+        NewsClassify newsClassify = null;
+        try {
+            newsClassify = newsClassifyService.findClassifyById(Integer.valueOf(id));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        model.addAttribute("newsClassify",newsClassify);
+        return "修改页面";
+    }
+
 }

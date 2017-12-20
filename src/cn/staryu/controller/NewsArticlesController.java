@@ -206,7 +206,7 @@ public class NewsArticlesController {
      */
     @RequestMapping("/showAtriclesByID")
     public String findAtriclesByID(Model model,String id){
-        NewsArticles newsArticles = new NewsArticles();
+        NewsArticles newsArticles = null;
         try {
             newsArticles = newsArticlesService.findArticlesById(Integer.valueOf(id));
         } catch (Exception e) {
@@ -264,7 +264,7 @@ public class NewsArticlesController {
     public String updatePage(Model model,String id){
         List<NewsClassify> list = new ArrayList<NewsClassify>();
         NewsClassify newsClassify = new NewsClassify();
-        NewsArticles newsArticles = new NewsArticles();
+        NewsArticles newsArticles = null;
 
         try {
             newsArticles = newsArticlesService.findArticlesById(Integer.valueOf(id));
