@@ -54,9 +54,7 @@
         select * from admin_user u
         WHERE u.adminName=#{adminName}  and u.adminPassword = #{adminPassword}
     </select>
-    <select id="findAllBackendUser" resultType="cn.staryu.pojo.AdminUserr">
-        SELECT * FROM admin_user
-    </select>
+
     <select id="findAllAdminUser" resultType="cn.staryu.pojo.AdminUser">
         SELECT * FROM admin_user
     </select>
