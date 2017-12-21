@@ -5,6 +5,7 @@ import cn.staryu.service.news_classify.NewsClassifyService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -19,7 +20,7 @@ import java.util.List;
 public class NewsClassifyController {
 
     @Resource
-    NewsClassifyService newsClassifyService;
+    private  NewsClassifyService newsClassifyService;
 
     /**
      * 添加新闻分类保存
@@ -27,7 +28,7 @@ public class NewsClassifyController {
      * @return
      */
     @RequestMapping("/addClassify")
-    @Resource
+    @ResponseBody
     public Object addClassify(NewsClassify newsClassify){
         int result = 0;
         try {
@@ -48,7 +49,7 @@ public class NewsClassifyController {
      * @return
      */
     @RequestMapping("/delClassify")
-    @Resource
+    @ResponseBody
     public Object delClassify(String id){
         int result = 0;
         try {
@@ -69,7 +70,7 @@ public class NewsClassifyController {
      * @return
      */
     @RequestMapping("/updateClassify")
-    @Resource
+    @ResponseBody
     public Object updateClassify(NewsClassify newsClassify){
         int result = 0;
         try {
