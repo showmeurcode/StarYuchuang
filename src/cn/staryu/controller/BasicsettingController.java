@@ -41,7 +41,7 @@ public class BasicsettingController {
     }
 
     //修改
-    @RequestMapping("changeBasicsetting")
+    @RequestMapping("/changeBasicsetting")
     @ResponseBody
     public Object changeBasicsetting(Basicsetting basicsetting){
         int rest=0;
@@ -85,6 +85,18 @@ public class BasicsettingController {
             e.printStackTrace();
         }
         model.addAttribute("basicsettingList",list);
+        return "";
+    }
+
+    //根据id查看
+    @RequestMapping("/findBasicsettingbyid")
+    public String findBasicsettingbyid(String id){
+        Basicsetting rest=null;
+        try {
+            rest=basicsettingService.findBasicsettingByid(Integer.valueOf(id));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return "";
     }
 }
