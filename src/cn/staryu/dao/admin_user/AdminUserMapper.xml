@@ -6,7 +6,7 @@
     <!-- ————————————————————————————————resultMap区————————————————————————————  -->
 
     <!--——————————————————————————————————增 ———————————————————————————————————————————————— -->
-    <insert id="addUser" parameterType="AdmindUser">
+    <insert id="addUser" parameterType="cn.staryu.pojo.AdminUser">
 
         INSERT  INTO admin_user (`adminName`,`adminPassword`,`phone`,`jurisdiction`,`registerDate`)
 
@@ -15,7 +15,7 @@
     </insert>
 
     <!--——————————————————————————————————删 ———————————————————————————————————————————————— -->
-    <delete id="deleteUser" parameterType="AdminUserr">
+    <delete id="deleteUser" parameterType="cn.staryu.pojo.AdminUser">
 
         DELETE FROM admin_user WHERE id=#{id}
 
@@ -23,7 +23,7 @@
 
     <!--——————————————————————————————————改 ———————————————————————————————————————————————— -->
     <!--更新用户信息 -->
-    <update id="updateUser" parameterType="AdminUserr">
+    <update id="updateUser" parameterType="cn.staryu.pojo.AdminUser">
 
         UPDATE  admin_user
         <set>

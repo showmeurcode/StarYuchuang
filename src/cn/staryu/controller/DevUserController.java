@@ -62,7 +62,7 @@ public class DevUserController {
         return "deleloper/useradd";
 
     }
-    @RequestMapping("addusersave")//保存用户
+    @RequestMapping("/addusersave")//保存用户
     public String addUsersave(DevUser devUser){
         int result=0;
         try {
@@ -81,7 +81,7 @@ public class DevUserController {
 
     }
 
-    @RequestMapping("delete")//删除用户
+    @RequestMapping("/delete")//删除用户
     public String delete(String id,Model model){
         int result=0;
 
@@ -134,7 +134,7 @@ public class DevUserController {
 
     }
 
-@RequestMapping("select")//根据用户名查询用户信息
+@RequestMapping("/select")//根据用户名查询用户信息
     public String select(@RequestParam String devName,Model model){
 
         DevUser devUser=new DevUser();
@@ -152,7 +152,7 @@ public class DevUserController {
 }
 
 
-@RequestMapping("selectfindUser")//查询所有用户
+@RequestMapping("/selectfindUser")//查询所有用户
     public String selectfindUser(Model model,DevUser devUser){
 
     List<DevUser> devUserList=new ArrayList<>();

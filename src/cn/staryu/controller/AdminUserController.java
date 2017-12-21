@@ -2,6 +2,7 @@ package cn.staryu.controller;
 
 import cn.staryu.pojo.AdminUser;
 import cn.staryu.service.admin_user.AdminUserService;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +18,8 @@ import java.util.List;
  * @author kongxiangzhong
  * 2017/12/19 15:52
  */
+@Controller
+@RequestMapping("/adminuser")
 public class AdminUserController {
 
     @Resource
@@ -58,7 +61,7 @@ public class AdminUserController {
         return "adminUser/useradd";
 
     }
-    @RequestMapping("addusersave")//保存用户
+    @RequestMapping("/addusersave")//保存用户
     public String addUsersave(AdminUser adminUser){
         int result=0;
         try {
@@ -77,7 +80,7 @@ public class AdminUserController {
 
     }
 
-    @RequestMapping("delete")//删除管理
+    @RequestMapping("/delete")//删除管理
     public String delete(String id){
         int result=0;
 
@@ -128,7 +131,7 @@ public class AdminUserController {
 
     }
 
-    @RequestMapping("select")//根据用户名查询用户信息
+    @RequestMapping("/select")//根据用户名查询用户信息
     public String select(@RequestParam String adminName,Model model){
 
         AdminUser adminUser=null;
@@ -144,7 +147,7 @@ public class AdminUserController {
 
     }
 
-    @RequestMapping("selectfindUser")//查询所有用户
+    @RequestMapping("/selectfindUser")//查询所有用户
     public String selectfindUser(Model model,AdminUser adminUser){
 
         List<AdminUser> adminUserList=new ArrayList<>();
