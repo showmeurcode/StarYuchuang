@@ -41,7 +41,7 @@ public class SinglepageReservationsController {
     }
 
     //修改
-    @RequestMapping("changeSinglepageReservations")
+    @RequestMapping("/changeSinglepageReservations")
     @ResponseBody
     public Object changeSinglepageReservations(SinglepageReservations singlepageReservations){
         int rest=0;
@@ -75,8 +75,8 @@ public class SinglepageReservationsController {
     }
 
     //查看
-    @RequestMapping("/findBasicsetting")
-    public String findBasicsetting(Model model){
+    @RequestMapping("/findSinglepageReservations")
+    public String findSinglepageReservations(Model model){
         SinglepageReservations singlepageReservations=new SinglepageReservations();
         List<SinglepageReservations> list=new ArrayList<SinglepageReservations>();
         try {
@@ -85,6 +85,18 @@ public class SinglepageReservationsController {
             e.printStackTrace();
         }
         model.addAttribute("singlepageReservationsList",list);
+        return "";
+    }
+
+    //根据id查看
+    @RequestMapping("/findSinglepageReservationsByid")
+    public String findSinglepageReservationsByid(String id){
+        SinglepageReservations rest=null;
+        try {
+            rest=singlepageReservationsService.findSinglepageReservationsByid(Integer.valueOf(id));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return "";
     }
 }

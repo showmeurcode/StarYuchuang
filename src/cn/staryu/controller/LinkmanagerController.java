@@ -22,7 +22,7 @@ public class LinkmanagerController {
     LinkmanagerService linkmanagerService;
 
     //增加
-    @RequestMapping("addLinkmanager")
+    @RequestMapping("/addLinkmanager")
     @ResponseBody
     public Object addLinkmanager(Linkmanager linkmanager){
         int rest=0;
@@ -87,4 +87,15 @@ public class LinkmanagerController {
         return "";
     }
 
+    //根据id查看
+    @RequestMapping("/findLinkmanagerByid")
+    public String findLinkmanagerByid(String id){
+        Linkmanager rest=null;
+        try {
+            rest=linkmanagerService.findLinkmanagerByid(Integer.valueOf(id));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
 }
