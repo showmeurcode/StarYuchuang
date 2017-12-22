@@ -314,7 +314,8 @@
             results = 0;
             searchText = this.get_search_text();
             escapedSearchText = searchText.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
-            regexAnchor = this.search_contains ? "" : "^";
+           // regexAnchor = this.search_contains ? "" : "^";  ÐÞ¸Ä20161205 Æ¥ÅäÈ«²¿
+		    regexAnchor = this.search_contains ? "" : "";
             regex = new RegExp(regexAnchor + escapedSearchText, 'i');
             zregex = new RegExp(escapedSearchText, 'i');
             _ref = this.results_data;
