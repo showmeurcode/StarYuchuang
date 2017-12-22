@@ -78,7 +78,7 @@ response.setHeader("Pragma","no-cache");
                         <a href="#" ondragstart="return false"><i class="fa fa-database"></i> <span class="nav-label">文章</span><span class="fa arrow"></span></a>
                          <ul class="nav nav-second-level">
                             <li>
-                                <a class="J_menuItem" href="LessonManage.jsp" ondragstart="return false">文章管理</a>
+                                <a class="J_menuItem" href="${pageContext.request.contextPath}/backend/LessonManage.jsp" ondragstart="return false">文章管理</a>
                             </li>
                             <li>
                                 <a class="J_menuItem" href="BasicDate/Position/PositionManage.jsp" ondragstart="return false">文章分类</a>

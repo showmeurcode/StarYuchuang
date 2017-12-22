@@ -195,7 +195,7 @@ public class NewsArticlesController {
             e.printStackTrace();
         }
         model.addAttribute("atriclesList",list);
-        return "新闻列表页面";
+        return "backend/LessonManage";
     }
 
     /**
