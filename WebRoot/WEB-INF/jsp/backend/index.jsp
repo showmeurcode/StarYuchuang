@@ -78,10 +78,10 @@ response.setHeader("Pragma","no-cache");
                         <a href="#" ondragstart="return false"><i class="fa fa-database"></i> <span class="nav-label">文章</span><span class="fa arrow"></span></a>
                          <ul class="nav nav-second-level">
                             <li>
-                                <a class="J_menuItem" href="${pageContext.request.contextPath}/backend/newslist.jsp" ondragstart="return false">文章管理</a>
+                                <a class="J_menuItem" href="${pageContext.request.contextPath}/newsAtricles/showAllAtricles" ondragstart="return false">文章管理</a>
                             </li>
                             <li>
-                                <a class="J_menuItem" href="${pageContext.request.contextPath}/backend/newsclassify.jsp" ondragstart="return false">文章分类</a>
+                                <a class="J_menuItem" href="${pageContext.request.contextPath}/WEB-INF/jsp/backend/newsclassify.jsp" ondragstart="return false">文章分类</a>
                             </li>
 
                         </ul>
@@ -110,7 +110,7 @@ response.setHeader("Pragma","no-cache");
                     <li>
                         <a href="#" ondragstart="return false"><i class="fa fa-edit"></i> <span class="nav-label">网站基础设置</span><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
-                            <li><a class="J_menuItem" href="${pageContext.request.contextPath}/backend/BasiceManage.jsp" ondragstart="return false">网站基础设置</a>
+                            <li><a class="J_menuItem" href="${pageContext.request.contextPath}/WEB-INF/jsp/backend/BasiceManage.jsp" ondragstart="return false">网站基础设置</a>
                             </li>
           
                         </ul>
@@ -118,7 +118,7 @@ response.setHeader("Pragma","no-cache");
                     <li>
                         <a href="#" ondragstart="return false"><i class="fa fa-smile-o"></i> <span class="nav-label">友情链接管理</span><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
-                            <li><a class="J_menuItem" href="${pageContext.request.contextPath}/backend/LinkManage.jsp" ondragstart="return false">友情链接管理</a>
+                            <li><a class="J_menuItem" href="${pageContext.request.contextPath}/WEB-INF/jsp/backend/LinkManage.jsp" ondragstart="return false">友情链接管理</a>
                             </li>
             
                            
@@ -127,7 +127,7 @@ response.setHeader("Pragma","no-cache");
                     <li>
                         <a href="#" ondragstart="return false"><i class="fa fa-history"></i> <span class="nav-label">单页面管理</span><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
-                            <li><a class="J_menuItem" href="${pageContext.request.contextPath}/backend/SingManage.jsp" ondragstart="return false">预约报名</a>
+                            <li><a class="J_menuItem" href="${pageContext.request.contextPath}/WEB-INF/jsp/backend/SingManage.jsp" ondragstart="return false">预约报名</a>
                         </ul>
                     </li>
                     <li>

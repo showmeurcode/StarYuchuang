@@ -195,7 +195,8 @@ public class NewsArticlesController {
             e.printStackTrace();
         }
         model.addAttribute("atriclesList",list);
-        return "backend/LessonManage";
+        System.out.print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+        return "backend/newslist";
     }
 
     /**
