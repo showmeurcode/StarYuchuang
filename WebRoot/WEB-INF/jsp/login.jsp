@@ -56,11 +56,15 @@
             </div>
         </div>
         <div class="col-sm-5">
-            <form method="post" action="logincheck">
+            <form action="${pageContext.request.contextPath}/adminuser/Blogin"  method="post" >
                 <h4 class="no-margins">登录：</h4>
                 <p class="m-t-md">登录到华兴科软[ 客户项目管理系统 ]</p>
-                <input type="text" name="uname" class="form-control uname" placeholder="用户名" required=""/>
-                <input type="password" name="passwd" class="form-control pword m-b" placeholder="密码" required=""/>
+                <font color="#c00fff">*</font>
+                <div style="display: inline; color:red">
+                    ${error}
+                </div>
+                <input type="text" name="uname" class="form-control uname"value="${adminuser.adminName}" placeholder="用户名" required=""/>
+                <input type="password" name="passwd" class="form-control pword m-b" value="${adminuser.adminPassword}" placeholder="密码" required=""/>
                 <a href="#">忘记密码了？</a>
                 <button class="btn btn-success btn-block" type="submit">登录</button>
             </form>

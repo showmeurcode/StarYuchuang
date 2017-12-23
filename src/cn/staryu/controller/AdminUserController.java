@@ -25,7 +25,7 @@ public class AdminUserController {
     @Resource
     AdminUserService adminUserService;
 
-    @RequestMapping(value="/login")//登录
+    @RequestMapping(value="/Blogin")//登录
     public String login(@ModelAttribute("adminUser") AdminUser adminUser , HttpSession session, HttpServletRequest request){
         AdminUser adminUser1=null;
         try {
@@ -38,11 +38,11 @@ public class AdminUserController {
             session.setAttribute("adminUserSession", adminUser1);
 
 
-            return "developer/frame";
+            return "backend/index";
         }else{
             request.setAttribute("error","用户名或密码不正确！");
 
-            return "backend/login";
+            return "/login";
         }
 
 
