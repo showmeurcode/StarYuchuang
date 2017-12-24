@@ -84,7 +84,7 @@ public class LinkmanagerController {
             e.printStackTrace();
         }
         model.addAttribute("linkmanagerList",list);
-        return "";
+        return "backend/LinkManage";
     }
 
     //根据id查看

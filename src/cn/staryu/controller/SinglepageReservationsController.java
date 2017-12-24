@@ -85,7 +85,7 @@ public class SinglepageReservationsController {
             e.printStackTrace();
         }
         model.addAttribute("singlepageReservationsList",list);
-        return "";
+        return "backend/SingManage";
     }
 
     //根据id查看

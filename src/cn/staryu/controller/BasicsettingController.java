@@ -85,7 +85,7 @@ public class BasicsettingController {
             e.printStackTrace();
         }
         model.addAttribute("basicsettingList",list);
-        return "";
+        return "backend/BasiceManage";
     }
 
     //根据id查看
