@@ -22,7 +22,7 @@ public interface AdminUserService {
     //根据用户名称查找用户是否存在
     AdminUser findUserByname(String adminName) throws Exception;
     //根据用户名称和密码确认用户登录
-    AdminUser finduserLogin(String adminName,String adminPassword) throws Exception;
+    AdminUser findUserLogin(String adminName,String adminPassword) throws Exception;
     //获取所有用户信息
     List<AdminUser> findAllBackendUser(AdminUser adminUser)throws Exception;
 

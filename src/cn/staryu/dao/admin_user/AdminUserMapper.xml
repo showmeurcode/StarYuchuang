@@ -51,8 +51,10 @@
 
     <!-- 验证登录-->
     <select id="findLoginUser" resultType="cn.staryu.pojo.AdminUser">
-        select * from admin_user u
-        WHERE u.adminName=#{adminName}  and u.adminPassword = #{adminPassword}
+
+        SELECT * FROM admin_user a
+        WHERE a.adminName=#{adminName} and a.adminPassword=#{adminPassword}
+
     </select>
 
     <select id="findAllAdminUser" resultType="cn.staryu.pojo.AdminUser">

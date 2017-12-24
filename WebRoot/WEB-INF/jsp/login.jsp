@@ -63,8 +63,8 @@
                 <div style="display: inline; color:red">
                     ${error}
                 </div>
-                <input type="text" name="uname" class="form-control uname"value="${adminuser.adminName}" placeholder="用户名" required=""/>
-                <input type="password" name="passwd" class="form-control pword m-b" value="${adminuser.adminPassword}" placeholder="密码" required=""/>
+                <input type="text" name="uname" class="form-control uname"value="${adminUser.adminName}" placeholder="用户名" required=""/>
+                <input type="password" name="passwd" class="form-control pword m-b" value="${adminUser.adminPassword}" placeholder="密码" required=""/>
                 <a href="#">忘记密码了？</a>
                 <button class="btn btn-success btn-block" type="submit">登录</button>
             </form>
@@ -77,8 +77,8 @@
     </div>
 </div>
 <script src="http://libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
-<script src="${pageContext.request.contextPath}/statics//js/bootstrap.min14ed.js?v=3.3.6"></script>
-<script src="${pageContext.request.contextPath}/statics//js/plugins/validate/jquery.validate.min.js"></script>
+<script src="${pageContext.request.contextPath}/statics/js/bootstrap.min14ed.js?v=3.3.6"></script>
+<script src="${pageContext.request.contextPath}/statics/js/plugins/validate/jquery.validate.min.js"></script>
 
 </body>
 

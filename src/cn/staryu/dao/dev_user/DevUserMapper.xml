@@ -52,7 +52,7 @@
     <select id="findLoginUser" resultType="DevUser">
         SELECT * FROM dev_user u
 
-        WHERE u.devCode = #{devName} and u.devPassword=#{devPassword}
+        WHERE u.devName = #{devName} and u.devPassword=#{devPassword}
 
     </select>
 

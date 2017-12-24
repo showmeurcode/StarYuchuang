@@ -53,7 +53,7 @@ public class  AdminUserServiceImpl implements AdminUserService {
     }
 
     @Override
-    public AdminUser finduserLogin(String adminName, String adminPassword) throws Exception {
+    public AdminUser findUserLogin(String adminName, String adminPassword) throws Exception {
         return adminUserMapper.findLoginUser(adminName,adminPassword);
     }
 

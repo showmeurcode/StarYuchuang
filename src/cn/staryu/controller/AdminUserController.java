@@ -26,10 +26,10 @@ public class AdminUserController {
     AdminUserService adminUserService;
 
     @RequestMapping(value="/Blogin")//登录
-    public String login(@ModelAttribute("adminUser") AdminUser adminUser , HttpSession session, HttpServletRequest request){
+    public String Blogin(@ModelAttribute("adminUser") AdminUser adminUser , HttpSession session, HttpServletRequest request){
         AdminUser adminUser1=null;
         try {
-            adminUser1=adminUserService.finduserLogin(adminUser.getAdminName(),adminUser.getAdminPassword());
+            adminUser1=adminUserService.findUserLogin(adminUser.getAdminName(),adminUser.getAdminPassword());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -42,7 +42,7 @@ public class AdminUserController {
         }else{
             request.setAttribute("error","用户名或密码不正确！");
 
-            return "/login";
+            return "backend/login";
         }
 
 
