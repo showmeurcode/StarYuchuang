@@ -21,17 +21,17 @@ public class LinkmanagerController {
     @Resource
     LinkmanagerService linkmanagerService;
 
-    //增加
+    //增加后判断
     @RequestMapping("/addLinkmanager")
     @ResponseBody
-    public Object addLinkmanager(Linkmanager linkmanager){
-        int rest=0;
+    public Object addLinkmanager(Linkmanager linkmanager) {
+        int rest = 0;
         try {
-            rest=linkmanagerService.addLinkmanager(linkmanager);
+            rest = linkmanagerService.addLinkmanager(linkmanager);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        if(rest>0){
+        if (rest > 0) {
             return "{\"status\":\"添加成功！\"}";
         }
 
@@ -42,14 +42,14 @@ public class LinkmanagerController {
     //修改
     @RequestMapping("/changeLinkmanager")
     @ResponseBody
-    public Object changeLinkmanager(Linkmanager linkmanager){
-        int rest=0;
+    public Object changeLinkmanager(Linkmanager linkmanager) {
+        int rest = 0;
         try {
-            rest=linkmanagerService.updateLinkmanager(linkmanager);
+            rest = linkmanagerService.updateLinkmanager(linkmanager);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        if (rest>0){
+        if (rest > 0) {
             return "{\"status\":\"修改成功！\"}";
         }
         return "{\"status\":\"修改失败！\"}";
@@ -59,14 +59,14 @@ public class LinkmanagerController {
     //删除
     @RequestMapping("/delLinkmanager")
     @ResponseBody
-    public Object delLinkmanager(String id){
-        int result=0;
+    public Object delLinkmanager(String id) {
+        int result = 0;
         try {
-            result=linkmanagerService.delLinkmanagerByid(Integer.valueOf(id));
+            result = linkmanagerService.delLinkmanagerByid(Integer.valueOf(id));
         } catch (Exception e) {
             e.printStackTrace();
         }
-        if(result>0){
+        if (result > 0) {
             return "{\"status\":\"删除成功！\"}";
         }
         return "{\"status\":\"删除失败！\"}";
@@ -75,27 +75,35 @@ public class LinkmanagerController {
 
     //查看
     @RequestMapping("/findLinkmanager")
-    public String findLinkmanager(Model model){
-        Linkmanager linkmanager=new Linkmanager();
-        List<Linkmanager>list=new ArrayList<Linkmanager>();
+    public String findLinkmanager(Model model) {
+        Linkmanager linkmanager = new Linkmanager();
+        List<Linkmanager> list = new ArrayList<Linkmanager>();
         try {
-            list=linkmanagerService.findLinkmanagerInfo(linkmanager);
+            list = linkmanagerService.findLinkmanagerInfo(linkmanager);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        model.addAttribute("linkmanagerList",list);
-        return "backend/LinkManage";
+        model.addAttribute("linkmanagerList", list);
+        return "backend/link/LinkManage";
     }
 
     //根据id查看
     @RequestMapping("/findLinkmanagerByid")
-    public String findLinkmanagerByid(String id){
-        Linkmanager rest=null;
+    public String findLinkmanagerByid(String id) {
+        Linkmanager rest = null;
         try {
-            rest=linkmanagerService.findLinkmanagerByid(Integer.valueOf(id));
+            rest = linkmanagerService.findLinkmanagerByid(Integer.valueOf(id));
         } catch (Exception e) {
             e.printStackTrace();
         }
         return "";
+    }
+
+    //添加显示
+    @RequestMapping("/addshowLink")
+    public String addshowLink() {
+
+
+        return "backend/link/addLink";
     }
 }

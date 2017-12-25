@@ -21,18 +21,18 @@ public class BasicsettingController {
     @Resource
     BasicsettingService basicsettingService;
 
-    //添加
+    //添加后判断
     @RequestMapping("/addBasicsetting")
     @ResponseBody
-    public Object addBasicsetting(Basicsetting basicsetting){
-        int rest=0;
+    public Object addBasicsetting(Basicsetting basicsetting) {
+        int rest = 0;
         try {
-            rest=basicsettingService.addBasicsetting(basicsetting);
+            rest = basicsettingService.addBasicsetting(basicsetting);
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-        if(rest>0){
+        if (rest > 0) {
             return "{\"status\":\"添加成功！\"}";
         }
 
@@ -43,60 +43,68 @@ public class BasicsettingController {
     //修改
     @RequestMapping("/changeBasicsetting")
     @ResponseBody
-    public Object changeBasicsetting(Basicsetting basicsetting){
-        int rest=0;
+    public Object changeBasicsetting(Basicsetting basicsetting) {
+        int rest = 0;
         try {
-            rest=basicsettingService.updateBasicsetting(basicsetting);
+            rest = basicsettingService.updateBasicsetting(basicsetting);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        if (rest>0){
+        if (rest > 0) {
             return "{\"status\":\"修改成功！\"}";
         }
         return "{\"status\":\"修改失败！\"}";
     }
-    
+
     //删除
     @RequestMapping("/delBasicsetting")
     @ResponseBody
-    public Object delBasicsetting(String id){
-        int result=0;
+    public Object delBasicsetting(String id) {
+        int result = 0;
         try {
-            result=basicsettingService.delBasicsettingByid(Integer.valueOf(id));
+            result = basicsettingService.delBasicsettingByid(Integer.valueOf(id));
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        if(result>0){
+        if (result > 0) {
             return "{\"status\":\"删除成功！\"}";
-        }else {
+        } else {
             return "{\"status\":\"删除失败！\"}";
         }
     }
 
     //查看
     @RequestMapping("/findBasicsetting")
-    public String findBasicsetting(Model model){
-        Basicsetting basicsetting=new Basicsetting();
-        List<Basicsetting> list=new ArrayList<Basicsetting>();
+    public String findBasicsetting(Model model) {
+        Basicsetting basicsetting = new Basicsetting();
+        List<Basicsetting> list = new ArrayList<Basicsetting>();
         try {
-            list=basicsettingService.findBasicsettingsByinfo(basicsetting);
+            list = basicsettingService.findBasicsettingsByinfo(basicsetting);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        model.addAttribute("basicsettingList",list);
-        return "backend/BasiceManage";
+        model.addAttribute("basicsettingList", list);
+        return "backend/basice/BasiceManage";
     }
 
     //根据id查看
     @RequestMapping("/findBasicsettingbyid")
-    public String findBasicsettingbyid(String id){
-        Basicsetting rest=null;
+    public String findBasicsettingbyid(String id) {
+        Basicsetting rest = null;
         try {
-            rest=basicsettingService.findBasicsettingByid(Integer.valueOf(id));
+            rest = basicsettingService.findBasicsettingByid(Integer.valueOf(id));
         } catch (Exception e) {
             e.printStackTrace();
         }
         return "";
+    }
+
+    //显示添加
+    @RequestMapping("/addshowBasic")
+    public String addshowBasic() {
+
+
+        return "backend/basice/addBasice";
     }
 }

@@ -34,7 +34,7 @@
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
 
-                    <button type="button" id="loading-example-btn" class="btn btn-success btn-sm" onclick="AddType()" ><i class="fa fa-spinner" aria-hidden="true"></i> 新增预约报名</button>
+                    <button type="button" id="loading-example-btn" class="btn btn-success btn-sm" onclick="AddType()" ><i class="fa fa-spinner" aria-hidden="true"></i> 新增基础设置</button>
 
                 </div>
                 <div style="display: block;" class="ibox-content">
@@ -50,21 +50,22 @@
                                     <thead>
                                     <tr>
                                         <th style="text-align:center; width:10%;">序号</th>
-                                        <th style="text-align:center; width:70%;">报名对象</th>
+                                        <th style="text-align:center; width:70%;">网络名称</th>
                                         <th style="text-align:center; width:20%;">操作</th>
 
                                     </tr>
                                     </thead>
                                     <tbody style="text-align:center;">
-                                    <c:forEach var="res" items="${singlepageReservationsList}">
+                                    <c:forEach var="res" items="${basicsettingList}">
                                         <tr>
                                             <td>${res.id}</td>
                                             <td>${res.name}</td>
+
+
                                             <td><a class="btn btn-primary btn-sm" href="#" onclick="edittype('1')">&#x7F16;&#x8F91;</a>&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-danger btn-sm" href="#" onclick="del('1')">&#x5220;&#x9664;</a></td>
-
-
                                         </tr>
                                     </c:forEach>
+
 
 
                                     </tbody>
@@ -173,17 +174,19 @@
     function AddType() {
         layer.open({
             type : 2,
-            title : '课程新增',
+            title : '增加保存网站基础设置',
             maxmin : true,
             shadeClose : false, //点击遮罩关闭层
             area : [ '600px', '260px' ],
-            content : 'LessonTypeAdd.jsp',
+            content : '${pageContext.request.contextPath}/basicsetting/addshowBasic',
             end: function(){
                 var table = $('.dataTables-example').DataTable();
                 table.draw( false );
             }
         });
     }
+
+
 </script>
 
 </body>

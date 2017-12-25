@@ -177,7 +177,7 @@
             maxmin : true,
             shadeClose : false, //点击遮罩关闭层
             area : [ '600px', '260px' ],
-            content : 'LessonTypeAdd.jsp',
+            content : '${pageContext.request.contextPath}/linkmanager/addshowLink',
             end: function(){
                 var table = $('.dataTables-example').DataTable();
                 table.draw( false );

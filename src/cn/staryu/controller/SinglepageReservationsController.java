@@ -21,7 +21,7 @@ public class SinglepageReservationsController {
     @Resource
     SinglepageReservationsService singlepageReservationsService;
 
-    //添加
+    //添加后判断
     @RequestMapping("/addSinglepageReservations")
     @ResponseBody
     public Object addSinglepageReservations(SinglepageReservations singlepageReservations){
@@ -85,7 +85,7 @@ public class SinglepageReservationsController {
             e.printStackTrace();
         }
         model.addAttribute("singlepageReservationsList",list);
-        return "backend/SingManage";
+        return "backend/sing/SingManage";
     }
 
     //根据id查看
@@ -98,5 +98,11 @@ public class SinglepageReservationsController {
             e.printStackTrace();
         }
         return "";
+    }
+
+    //增加显示
+    @RequestMapping("/addshowSing")
+    public String addshowSing(){
+        return "backend/sing/addSing";
     }
 }
