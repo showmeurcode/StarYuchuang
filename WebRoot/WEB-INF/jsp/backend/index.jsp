@@ -81,7 +81,7 @@
                             <a class="J_menuItem" href="${pageContext.request.contextPath}/newsAtricles/showAllAtricles" ondragstart="return false">文章管理</a>
                         </li>
                         <li>
-                            <a class="J_menuItem" href="${pageContext.request.contextPath}/WEB-INF/jsp/backend/newsclassify.jsp" ondragstart="return false">文章分类</a>
+                            <a class="J_menuItem" href="${pageContext.request.contextPath}/newsClassify/showClassify" ondragstart="return false">文章分类</a>
                         </li>
 
                     </ul>
