@@ -7,7 +7,7 @@ public class NewsArticles {
     private Integer id;
     private String title;
     private String author;
-    private Integer classifyid;
+    private Integer classifyId;
     private Date puttime;
     private Integer count;
     private String content;
@@ -37,12 +37,12 @@ public class NewsArticles {
         this.author = author;
     }
 
-    public Integer getClassifyid() {
-        return classifyid;
+    public Integer getClassifyId() {
+        return classifyId;
     }
 
-    public void setClassifyid(Integer classifyid) {
-        this.classifyid = classifyid;
+    public void setClassifyId(Integer classifyid) {
+        this.classifyId = classifyid;
     }
 
     public Date getPuttime() {

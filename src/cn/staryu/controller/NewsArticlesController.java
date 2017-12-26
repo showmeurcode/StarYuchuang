@@ -36,50 +36,16 @@ public class NewsArticlesController {
     /**
      * 添加新闻的保存操作
      * @param newsArticles
-     * @param session
-     * @param request
-     * @param attach
+//     * @param session
      * @return
      */
     @RequestMapping("/addAtricles")
     @ResponseBody
-    public Object addAtricles(NewsArticles newsArticles, HttpSession session, HttpServletRequest request,
-                              @RequestParam(value = "picture",required = false) MultipartFile attach){
+    public Object addAtricles(NewsArticles newsArticles){
 
-        if (!attach.isEmpty()) {
-            String path = request.getSession().getServletContext().getRealPath("statics"+ File.separator+"uploadfiles");
-
-            String oldFileName = attach.getOriginalFilename();//原文件名
-            String prefix = FilenameUtils.getExtension(oldFileName);//原文件名后缀
-            int filesize = 50000;
-            if (attach.getSize() > filesize) { //上传大小不得超过50KB
-                return "{\"status\":\"上传大小不得超过50KB\"}";
-            } else if (prefix.equalsIgnoreCase("jpg")
-                    || prefix.equalsIgnoreCase("png")
-                    || prefix.equalsIgnoreCase("jpeg")) {
-                String fileName = System.currentTimeMillis()+ RandomUtils.nextInt(1000000)+"_Personal.jpg";
-                File targetFile = new File(path,fileName);
-                if (!targetFile.exists()) {
-                    targetFile.mkdirs();
-                }
-                //保存
-                try {
-                    attach.transferTo(targetFile);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    request.setAttribute("uploadFileError","* 上传失败！");
-                    return "{\"status\":\"上传失败！\"}";
-                }
-                String picture = path+File.separator+fileName;
-                newsArticles.setPicture(picture);
-            } else {
-                request.setAttribute("uploadFileError","* 上传图片格式不正确");
-                return "{\"status\":\"上传图片格式不正确！\"}";
-            }
-        }
-
-        DevUser devUser = (DevUser) session.getAttribute("devUserSession");
-        newsArticles.setAuthor(devUser.getDevName());
+//        DevUser devUser = (DevUser) session.getAttribute("devUserSession");
+//        newsArticles.setAuthor(devUser.getDevName());
+        newsArticles.setAuthor("test00");
         newsArticles.setPuttime(new Date());
         newsArticles.setCount(0);
         int result = 0;
@@ -121,50 +87,16 @@ public class NewsArticlesController {
     /**
      * 更改新闻保存操作
      * @param newsArticles
-     * @param session
-     * @param request
-     * @param attach
+//     * @param session
      * @return
      */
     @RequestMapping("/updateAtricles")
     @ResponseBody
-    public Object updateAtricles(NewsArticles newsArticles, HttpSession session, HttpServletRequest request,
-                                 @RequestParam(value = "picture",required = false) MultipartFile attach){
+    public Object updateAtricles(NewsArticles newsArticles){
 
-        if (!attach.isEmpty()) {
-            String path = request.getSession().getServletContext().getRealPath("statics"+ File.separator+"uploadfiles");
-
-            String oldFileName = attach.getOriginalFilename();//原文件名
-            String prefix = FilenameUtils.getExtension(oldFileName);//原文件名后缀
-            int filesize = 50000;
-            if (attach.getSize() > filesize) { //上传大小不得超过50KB
-                return "{\"status\":\"上传大小不得超过50KB\"}";
-            } else if (prefix.equalsIgnoreCase("jpg")
-                    || prefix.equalsIgnoreCase("png")
-                    || prefix.equalsIgnoreCase("jpeg")) {
-                String fileName = System.currentTimeMillis()+ RandomUtils.nextInt(1000000)+"_Personal.jpg";
-                File targetFile = new File(path,fileName);
-                if (!targetFile.exists()) {
-                    targetFile.mkdirs();
-                }
-                //保存
-                try {
-                    attach.transferTo(targetFile);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    request.setAttribute("uploadFileError","* 上传失败！");
-                    return "{\"status\":\"上传失败！\"}";
-                }
-                String picture = path+File.separator+fileName;
-                newsArticles.setPicture(picture);
-            } else {
-                request.setAttribute("uploadFileError","* 上传图片格式不正确");
-                return "{\"status\":\"上传图片格式不正确！\"}";
-            }
-        }
-
-        DevUser devUser = (DevUser) session.getAttribute("devUserSession");
-        newsArticles.setAuthor(devUser.getDevName());
+//        DevUser devUser = (DevUser) session.getAttribute("devUserSession");
+//        newsArticles.setAuthor(devUser.getDevName());
+        newsArticles.setAuthor("test00");
         newsArticles.setPuttime(new Date());
         newsArticles.setCount(0);
         int result = 0;
@@ -187,6 +119,7 @@ public class NewsArticlesController {
      */
     @RequestMapping("/showAllAtricles")
     public String findAllAtricles(Model model){
+
         NewsArticles newsArticles = new NewsArticles();
         List<NewsArticles> list = new ArrayList<NewsArticles>();
         try {
@@ -194,9 +127,8 @@ public class NewsArticlesController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        model.addAttribute("atriclesList",list);
-        System.out.print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-        return "backend/newslist";
+        model.addAttribute("articlesList",list);
+        return "backend/newsArticles/newslist";
     }
 
     /**
@@ -226,7 +158,7 @@ public class NewsArticlesController {
     @RequestMapping("/showAtriclesByClassify")
     public String findAtriclesByClassify(Model model,String classifyId){
         NewsArticles newsArticles = new NewsArticles();
-        newsArticles.setClassifyid(Integer.valueOf(classifyId));
+        newsArticles.setClassifyId(Integer.valueOf(classifyId));
         List<NewsArticles> list = new ArrayList<NewsArticles>();
         try {
             list = newsArticlesService.findArticlesByInfo(newsArticles);
@@ -252,7 +184,7 @@ public class NewsArticlesController {
             e.printStackTrace();
         }
         model.addAttribute("newsClassifyList",list);
-        return "添加页面";
+        return "backend/newsArticles/addNewsArticles";
     }
 
     /**
@@ -276,7 +208,7 @@ public class NewsArticlesController {
 
         model.addAttribute("newsArticles",newsArticles);
         model.addAttribute("newsClassifyList",list);
-        return "修改页面";
+        return "backend/newsArticles/updateNewsArticles";
     }
 
 }

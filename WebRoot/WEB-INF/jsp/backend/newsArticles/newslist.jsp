@@ -34,7 +34,7 @@
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
 
-                    <button type="button" id="loading-example-btn" class="btn btn-success btn-sm" onclick="AddType()" ><i class="fa fa-spinner" aria-hidden="true"></i> 新增课程</button>
+                    <button type="button" id="loading-example-btn" class="btn btn-success btn-sm" onclick="AddType()" ><i class="fa fa-spinner" aria-hidden="true"></i> 新增文章</button>
 
                 </div>
                 <div style="display: block;" class="ibox-content">
@@ -50,18 +50,18 @@
                                     <thead>
                                     <tr>
                                         <th style="text-align:center; width:10%;">序号</th>
-                                        <th style="text-align:center; width:70%;">课程</th>
+                                        <th style="text-align:center; width:70%;">文章标题</th>
                                         <th style="text-align:center; width:20%;">操作</th>
 
                                     </tr>
                                     </thead>
                                     <tbody style="text-align:center;">
-                                    <c:forEach var="atricles" items="${atriclesList}">
+                                    <c:forEach var="atricles" items="${articlesList}">
 
                                         <tr>
                                             <td>${atricles.id}</td>
                                             <td>${atricles.title}</td>
-                                            <td><a class="btn btn-primary btn-sm" href="#" onclick="edittype('1')">&#x7F16;&#x8F91;</a>&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-danger btn-sm" href="#" onclick="del('1')">&#x5220;&#x9664;</a></td>
+                                            <td><a class="btn btn-primary btn-sm" href="#" onclick="edittype('${atricles.id}')">&#x7F16;&#x8F91;</a>&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-danger btn-sm" href="#" onclick="del('${atricles.id}')">&#x5220;&#x9664;</a></td>
                                         </tr>
 
                                     </c:forEach>
@@ -70,7 +70,7 @@
                                     <tfoot>
                                     <tr>
                                         <th style="text-align:center; width:10%;">序号</th>
-                                        <th style="text-align:center; width:70%;">课程</th>
+                                        <th style="text-align:center; width:70%;">文章标题</th>
                                         <th style="text-align:center; width:20%;">操作</th>
                                     </tr>
                                     </tfoot>
@@ -110,16 +110,16 @@
             closeOnConfirm: true
         }, function () {
             $.ajax({
-                url: "/ceshi/BasicDate?flag=Lessondel",
+                url: "${pageContext.request.contextPath}/newsAtricles/delAtricles",
                 data: {
-                    "uid": sid
+                    "id": sid
                 }, success: function (data) {
                     //table.ajax.reload();
-                    if (data=1){
+                    if (data.status="success"){
                         setTimeout(function(){swal("删除成功！", "您已经永久删除了这条信息。", "success");},100);
                         var table = $('.dataTables-example').DataTable();
                         table.draw( false );
-                    }else if (data=0){
+                    }else if (data.status="error"){
                         setTimeout(function(){swal("删除失败！", "此信息没有执行删除操作。", "error");},100);
                     }
                 }
@@ -157,11 +157,11 @@
         var table = $('.dataTables-example').DataTable();
         layer.open({
             type : 2,
-            title : '课程修改',
+            title : '修改文章',
             maxmin : true,
             shadeClose : false, //点击遮罩关闭层
             area : [ '600px', '260px' ],
-            content : ['LessonTypeEdit.jsp?id=' + sid +'&pages='+ table.page() +'&pagesum='+ table.page.len(),'no'],
+            content : ['${pageContext.request.contextPath}/newsAtricles/update?id=' + sid,'no'],
             end: function(){
                 var table = $('.dataTables-example').DataTable();
                 table.draw( false );
@@ -172,11 +172,11 @@
     function AddType() {
         layer.open({
             type : 2,
-            title : '课程新增',
+            title : '新增文章',
             maxmin : true,
             shadeClose : false, //点击遮罩关闭层
             area : [ '600px', '260px' ],
-            content : 'LessonTypeAdd.jsp',
+            content : '${pageContext.request.contextPath}/newsAtricles/add',
             end: function(){
                 var table = $('.dataTables-example').DataTable();
                 table.draw( false );

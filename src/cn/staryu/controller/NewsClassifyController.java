@@ -100,7 +100,7 @@ public class NewsClassifyController {
             e.printStackTrace();
         }
         model.addAttribute("newsClassifyList",list);
-        return "新闻分类列表";
+        return "backend/newsClassify/newsclassify";
     }
 
     /**
@@ -118,7 +118,39 @@ public class NewsClassifyController {
             e.printStackTrace();
         }
         model.addAttribute("newsClassify",newsClassify);
-        return "修改页面";
+        return "backend/newsClassify/updateNewsClassify";
+    }
+
+    /**
+     * 新闻添加页面
+     * @return
+     */
+    @RequestMapping("/add")
+    public String addPage(){
+        return "backend/newsClassify/addNewsClassify";
+    }
+
+    /**
+     * 检测分类名称的唯一性
+     * @param name
+     * @return
+     */
+    @RequestMapping("/nameSole")
+    @ResponseBody
+    public Object nameSole(String name){
+        NewsClassify newsClassify = new NewsClassify();
+        List<NewsClassify> list = new ArrayList<NewsClassify>();
+        try {
+            list = newsClassifyService.findClassifyByInfo(newsClassify);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        for (NewsClassify newsClassify1 : list) {
+            if (newsClassify1.getName().equals(name)){
+                return "{\"status\":\"error\"}";
+            }
+        }
+        return "{\"status\":\"success\"}";
     }
 
 }
