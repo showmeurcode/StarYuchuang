@@ -101,10 +101,9 @@
         var appInfo=$("#appInfo").val();
         var data="netname="+netname+"&addess="+addess+"&appInfo="+appInfo;
 
-        alert(data);
         $.ajax({
             type:"POST",
-            url:"${pageContext.request.contextPath}/singlepageReservations/addBasice.json",
+            url:"${pageContext.request.contextPath}/singlepageReservations/addSinglepageReservations",
             data:data,
             dataType:"json",
             async:false,
