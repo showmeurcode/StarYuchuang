@@ -103,7 +103,7 @@
 
         $.ajax({
             type:"POST",
-            url:"${pageContext.request.contextPath}/singlepageReservations/addSinglepageReservations",
+            url:"${pageContext.request.contextPath}/basicsetting/addBasicsetting",
             data:data,
             dataType:"json",
             async:false,
