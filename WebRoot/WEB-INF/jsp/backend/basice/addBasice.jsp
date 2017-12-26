@@ -34,7 +34,7 @@
 <div class="x_content">
 
     <form id="appaddform" class="form-horizontal form-label-left"
-          method="post" enctype="multipart/form-data">
+          method="post" enctype="multipart/form-data" >
 
         <p>请填写信息
 
@@ -83,8 +83,7 @@
         <div class="ln_solid"></div>
         <div class="form-group">
             <div class="col-md-6 col-md-offset-3">
-                <a id="send1" type="button" class="btn btn-success">保存</a>
-                </input>
+                <button id="send1" type="button" class="btn btn-success">保存</button>
                 <button type="button" class="btn btn-primary">返回</button>
             </div>
         </div>
@@ -92,4 +91,40 @@
 </div>
 
 </body>
+<script type="text/javascript" src="${pageContext.request.contextPath }/statics/js/jquery-1.4.4.min.js"></script>
+<script type="text/javascript">
+
+
+    $("#send1").click(function () {
+        var netname=$("#netname").val();
+        var addess=$("#addess").val();
+        var appInfo=$("#appInfo").val();
+        var data="netname="+netname+"&addess="+addess+"&appInfo="+appInfo;
+
+        alert(data);
+        $.ajax({
+            type:"POST",
+            url:"${pageContext.request.contextPath}/singlepageReservations/addBasice.json",
+            data:data,
+            dataType:"json",
+            async:false,
+            cache:false,
+            contentType:false,
+            processData:false,
+            success:function (data) {
+                if (data.status == "添加成功") {
+                    alert("添加成功！");
+                    <%--$("#Content").load("${pageContext.request.contextPath}/singlepageReservations/findSinglepageReservations");--%>
+
+                } else {
+                    alert(data.status);
+                }
+            },
+            error:function (data) {
+                alert("添加大失败");
+            }
+        });
+    });
+
+</script>
 </html>
