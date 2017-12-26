@@ -118,10 +118,10 @@
             <div class="col-md-6 col-sm-6 col-xs-12">
                 <select name="information" id="information"
                         class="form-control col-md-7 col-xs-12" required="required">
-                    <c:if test="${sing.information == information}">selected</c:if>
+
                     <option value="0" selected>请选择</option> 
-                    <option value="1">是</option> 
-                    <option value="2">否</option> 
+                    <option value="1" <c:if test="${SingList.information == 1}">selected</c:if>>是</option> 
+                    <option value="2" <c:if test="${SingList.information == 2}">selected</c:if>>否</option> 
                 </select>
             </div>
         </div>

@@ -130,33 +130,93 @@
 </body>
 <script type="text/javascript" src="${pageContext.request.contextPath }/statics/js/jquery-1.4.4.min.js"></script>
 <script type="text/javascript">
-    $("#send1").click(function () {
-        var enrolment=$("#enrolment").val();
-        var name=$("#name").val();
-        var age=$("#age").val();
-        var email=$("#email").val();
-        var phone=$("#phone").val();
-        var information=$("#information").val();
-        var bpar=$("#appaddform").serialize();
-        alert(bpar);
-        $.ajax({
-            type:"POST",
-            url:"${pageContext.request.contextPath}/singlepageReservations/addSinglepageReservations.json",
-            data:bpar,
-            dataType:"json",
-            success:function (data) {
-                if (data.status == "添加成功") {
-                    alert("添加成功！");
-                    <%--$("#Content").load("${pageContext.request.contextPath}/singlepageReservations/findSinglepageReservations");--%>
+    var flag = false;
 
-                } else {
-                    alert(data.status);
+    $("#send1").click(function () {
+
+        if (flag) {
+            var bpar=$("#appaddform").serialize();
+//        alert(bpar);
+            $.ajax({
+                type:"POST",
+                url:"${pageContext.request.contextPath}/singlepageReservations/addSinglepageReservations.json",
+                data:bpar,
+                dataType:"json",
+                success:function (data) {
+                    if (data.status == "添加成功") {
+                        alert("添加成功！");
+                        <%--$("#Content").load("${pageContext.request.contextPath}/singlepageReservations/findSinglepageReservations");--%>
+
+                    } else {
+                        alert(data.status);
+                    }
+                },
+                error:function (data) {
+                    alert("添加大失败");
                 }
-            },
-            error:function (data) {
-                alert("添加大失败");
-            }
-        });
+            });
+        }else {
+            alert("填写不符合，无法保存");
+            return false;
+        }
+
     });
+
+
+    $("#enrolment").blur(function () {
+        var enrolment=$("#enrolment").val();
+        if (enrolment == "" || enrolment == null) {
+            flag = false;
+            $("#yzenrolment").html("报名对象不能为空")
+        } else {
+            $("#yzenrolment").html("");
+            flag = true;
+        }
+    });
+
+    $("#name").blur(function () {
+        var name=$("#name").val();
+        if (name == "" || name == null) {
+            flag = false;
+            $("#yzname").html("姓名不能为空")
+        } else {
+            $("#yzname").html("");
+            flag = true;
+        }
+    });
+
+    $("#age").blur(function () {
+        var age=$("#age").val();
+        if (age == "" || age == null) {
+            flag = false;
+            $("#yzage").html("年龄不能为空")
+        } else {
+            $("#yzage").html("");
+            flag = true;
+        }
+    });
+
+    $("#email").blur(function () {
+        var email=$("#email").val();
+        if (email == "" || email == null) {
+            flag = false;
+            $("#yzemail").html("邮箱不能为空")
+        } else {
+            $("#yzemail").html("");
+            flag = true;
+        }
+    });
+
+    $("#phone").blur(function () {
+        var phone=$("#phone").val();
+        if (phone == "" || phone == null) {
+            flag = false;
+            $("#yzphone").html("电话不能为空")
+        } else {
+            $("#yzphone").html("");
+            flag = true;
+        }
+    });
+
 </script>
 </html>

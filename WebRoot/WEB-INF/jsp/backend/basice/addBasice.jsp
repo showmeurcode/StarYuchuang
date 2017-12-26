@@ -93,32 +93,69 @@
 </body>
 <script type="text/javascript" src="${pageContext.request.contextPath }/statics/js/jquery-1.4.4.min.js"></script>
 <script type="text/javascript">
-
+    var flag = false;
 
     $("#send1").click(function () {
-        var netname=$("#netname").val();
-        var addess=$("#addess").val();
-        var appInfo=$("#appInfo").val();
-        var bpar=$("#appaddform").serialize();
+        if (flag) {
+            var bpar=$("#appaddform").serialize();
 
-        $.ajax({
-            type:"POST",
-            url:"${pageContext.request.contextPath}/basicsetting/addBasicsetting.json",
-            data:bpar,
-            dataType:"json",
-            success:function (data) {
-                if (data.status == "添加成功") {
-                    alert("添加成功！");
-                    <%--$("#Content").load("${pageContext.request.contextPath}/singlepageReservations/findSinglepageReservations");--%>
+            $.ajax({
+                type:"POST",
+                url:"${pageContext.request.contextPath}/basicsetting/addBasicsetting.json",
+                data:bpar,
+                dataType:"json",
+                success:function (data) {
+                    if (data.status == "添加成功") {
+                        alert("添加成功！");
+                        $("#Content").load("${pageContext.request.contextPath}/basicsetting/findBasicsetting");
 
-                } else {
-                    alert(data.status);
+                    } else {
+                        alert(data.status);
+                    }
+                },
+                error:function (data) {
+                    alert("添加大失败");
                 }
-            },
-            error:function (data) {
-                alert("添加大失败");
-            }
-        });
+            });
+        }else {
+            alert("填写不符合，无法保存");
+            return false;
+        }
+
+    });
+
+
+    $("#name").blur(function () {
+        var name=$("#name").val();
+        if (name == "" || name == null) {
+            flag = false;
+            $("#yzname").html("网络名称不能为空")
+        } else {
+            $("#yzname").html("");
+            flag = true;
+        }
+    });
+
+    $("#adress").blur(function () {
+        var adress=$("#adress").val();
+        if (adress == "" || adress == null) {
+            flag = false;
+            $("#yzaddess").html("域名地址不能为空")
+        } else {
+            $("#yzaddess").html("");
+            flag = true;
+        }
+    });
+
+    $("#describe").blur(function () {
+        var describe=$("#describe").val();
+        if (describe == "" || describe == null) {
+            flag = false;
+            $("#yztext").html("站点描述不能为空")
+        } else {
+            $("#yztext").html("");
+            flag = true;
+        }
     });
 
 </script>

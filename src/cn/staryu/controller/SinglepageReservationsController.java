@@ -116,7 +116,7 @@ public class SinglepageReservationsController {
             e.printStackTrace();
         }
         model.addAttribute("SingList",singlepageReservations);
-        return "backend/Sing/updateSing";
+        return "backend/sing/updateSing";
     }
 
 }

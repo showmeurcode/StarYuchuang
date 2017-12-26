@@ -81,31 +81,59 @@
 </body>
 <script type="text/javascript" src="${pageContext.request.contextPath }/statics/js/jquery-1.4.4.min.js"></script>
 <script type="text/javascript">
-
+    var flag = false;
 
     $("#send1").click(function () {
-        var intername=$("#intername").val();
-        var connect=$("#connect").val();
-        var bpar=$("#appaddform").serialize();
+        if (flag) {
+            var bpar=$("#appaddform").serialize();
 
-        $.ajax({
-            type:"POST",
-            url:"${pageContext.request.contextPath}/linkmanager/addLinkmanager.json",
-            data:bpar,
-            dataType:"json",
-            success:function (data) {
-                if (data.status == "添加成功") {
-                    alert("添加成功！");
-                    <%--$("#Content").load("${pageContext.request.contextPath}/singlepageReservations/findSinglepageReservations");--%>
+            $.ajax({
+                type:"POST",
+                url:"${pageContext.request.contextPath}/linkmanager/addLinkmanager.json",
+                data:bpar,
+                dataType:"json",
+                success:function (data) {
+                    if (data.status == "添加成功") {
+                        alert("添加成功！");
+                        <%--$("#Content").load("${pageContext.request.contextPath}/singlepageReservations/findSinglepageReservations");--%>
 
-                } else {
-                    alert(data.status);
+                    } else {
+                        alert(data.status);
+                    }
+                },
+                error:function (data) {
+                    alert("添加大失败");
                 }
-            },
-            error:function (data) {
-                alert("添加大失败");
-            }
-        });
+            });
+        }else{
+            alert("填写不符合，无法保存");
+            return false;
+        }
+
+    });
+
+
+
+    $("#name").blur(function () {
+        var name=$("#name").val();
+        if (name == "" || name == null) {
+            flag = false;
+            $("#yzname").html("网站名称不能为空")
+        } else {
+            $("#yzname").html("");
+            flag = true;
+        }
+    });
+
+    $("#link").blur(function () {
+        var link=$("#link").val();
+        if (link == "" || link == null) {
+            flag = false;
+            $("#yzlink").html("网站链接不能为空")
+        } else {
+            $("#yzlink").html("");
+            flag = true;
+        }
     });
 
 </script>

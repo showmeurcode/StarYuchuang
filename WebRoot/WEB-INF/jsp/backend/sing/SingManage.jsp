@@ -111,9 +111,9 @@
             closeOnConfirm: true
         }, function () {
             $.ajax({
-                url: "/ceshi/BasicDate?flag=Lessondel",
+                url: "${pageContext.request.contextPath}/singlepageReservations/delSinglepageReservationsg",
                 data: {
-                    "uid": sid
+                    "id": sid
                 }, success: function (data) {
                     //table.ajax.reload();
                     if (data=1){
