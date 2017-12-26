@@ -20,6 +20,17 @@
     <meta http-equiv="expires" content="0">
     <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
     <meta http-equiv="description" content="This is my page">
+    <!-- Bootstrap -->
+    <link href="${pageContext.request.contextPath }/statics/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="${pageContext.request.contextPath }/statics/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="${pageContext.request.contextPath }/statics/css/nprogress.css" rel="stylesheet">
+    <!-- iCheck -->
+    <link href="../vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+
+    <!-- Datatables -->
+    <link href="${pageContext.request.contextPath }/statics/css/jquery.dataTables.min.css" rel="stylesheet">
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 </head>
@@ -27,31 +38,34 @@
 <form method="post" id="updateArticles">
 
     <input name="id" value="${newsArticles.id}" hidden/>
-    <label for="title">文章标题</label><input type="text" name="title" id="title" required placeholder="文章标题" value="${newsArticles.title}"/>
+    <label for="title">文章标题</label>
+    <input type="text" name="title" id="title" required placeholder="文章标题" value="${newsArticles.title}"/>
+    <span id="yztitle"></span>
     文章分类
     <select name="classifyId">
         <c:forEach items="${newsClassifyList}" var="newsClassify">
-        <option value="${newsClassify.id}" <c:if test="${newsArticles.classifyId == newsClassify.id}">selected</c:if> >${newsClassify.name}</option>
+            <option value="${newsClassify.id}" <c:if test="${newsArticles.classifyId == newsClassify.id}">selected</c:if> >${newsClassify.name}</option>
         </c:forEach>
     </select>
     <div id="div1">
         ${newsArticles.content}
+    </div>
     <textarea name="content" id="content" style="width:100%; height:200px;" hidden></textarea>
 
-    <button type="button" id="submit">保存</button>
+    <button type="button" id="submit" class="btn btn-success">保存</button>
 
     <!-- 注意， 只需要引用 JS，无需引用任何 CSS ！！！-->
     <script type="text/javascript" src="${pageContext.request.contextPath}/statics/js/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/statics/js/wangEditor.js"></script>
     <script type="text/javascript">
-        var E = window.wangEditor
-        var editor = new E('#div1')
-        var $text1 = $('#content')
+        var E = window.wangEditor;
+        var editor = new E('#div1');
+        var $text1 = $('#content');
         editor.customConfig.onchange = function (html) {
             // 监控变化，同步更新到 textarea
             $text1.val(html)
-        }
-        editor.create()
+        };
+        editor.create();
         // 初始化 textarea 的值
         $text1.val(editor.txt.html())
 
@@ -59,30 +73,49 @@
 
     <script type="text/javascript">
 
-        $("#submit").click(function () {
-            var bparams = $("#updateArticles").serialize();
-            alert(bparams);
-            $.ajax({
+        var flag = false;
+        $("#title").blur(function () {
+            var title = $("#title").val();
+            if (title == "" || title == null) {
+                flag = false;
+                $("#yztitle").html("标题不能为空")
+            } else {
+                $("#yztitle").html("");
+                flag = true;
+            }
+        });
 
-                type:"POST",
-                url:"${pageContext.request.contextPath}/newsAtricles/updateAtricles.json",
-                data:bparams,
-                dataType:"json",
-                success:function (data) {
-                    if (data.status == "success") {
-                        alert("修改成功");
-                    } else {
-                        alert(data.status);
+        $("#submit").click(function () {
+
+            if (flag) {
+                var bparams = $("#updateArticles").serialize();
+                alert(bparams);
+                $.ajax({
+
+                    type:"POST",
+                    url:"${pageContext.request.contextPath}/newsAtricles/updateAtricles.json",
+                    data:bparams,
+                    dataType:"json",
+                    success:function (data) {
+                        if (data.status == "success") {
+                            alert("修改成功");
+                        } else {
+                            alert(data.status);
+                        }
+
+                    },
+                    error:function (XMLHttpRequest, textStatus, errorThrown) {
+                        alert("XMLHttpRequest.status："+XMLHttpRequest.status);
+                        alert("XMLHttpRequest.readyState："+XMLHttpRequest.readyState);
+                        alert("textStatus："+textStatus);
                     }
 
-                },
-                error:function (XMLHttpRequest, textStatus, errorThrown) {
-                    alert("XMLHttpRequest.status："+XMLHttpRequest.status);
-                    alert("XMLHttpRequest.readyState："+XMLHttpRequest.readyState);
-                    alert("textStatus："+textStatus);
-                }
+                });
+            } else {
+                return false;
+            }
 
-            });
+
         });
     </script>
 </form>
