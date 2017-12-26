@@ -34,7 +34,7 @@
 <div class="x_content">
 
     <form id="appaddform" class="form-horizontal form-label-left"
-          method="post" enctype="multipart/form-data">
+          method="post">
 
         <p>请填写信息
 
@@ -42,12 +42,12 @@
         <span class="section"> </span>
 
         <div class="item form-group">
-            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="netname">网络名称
+            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">网络名称
                 <span class="required">*</span>
             </label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-                <input id="netname" class="form-control col-md-7 col-xs-12"
-                       name="netname" placeholder="请输入网络名称"
+                <input id="name" class="form-control col-md-7 col-xs-12"
+                       name="name" placeholder="请输入网络名称"
                        required="required" type="text">
 
             </div>
@@ -55,22 +55,22 @@
         </div>
         <div class="item form-group">
             <label class="control-label col-md-3 col-sm-3 col-xs-12"
-                   for="connect">网络连接<span class="required">*</span>
+                   for="link">网络连接<span class="required">*</span>
             </label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="text" id="connect" name="connect" required="required"
+                <input type="text" id="link" name="link" required="required"
                        placeholder="请输入网络连接"
                        class="form-control col-md-7 col-xs-12">
 
             </div>
-            <span id="yzconnect"></span>
+            <span id="yzlink"></span>
         </div>
 
 
         <div class="ln_solid"></div>
         <div class="form-group">
             <div class="col-md-6 col-md-offset-3">
-                <a id="send1" type="button" class="btn btn-success">保存</a>
+                <button id="send1" type="button" class="btn btn-success">保存</button>
                 </input>
                 <button type="button" class="btn btn-primary">返回</button>
             </div>
@@ -79,4 +79,34 @@
 </div>
 
 </body>
+<script type="text/javascript" src="${pageContext.request.contextPath }/statics/js/jquery-1.4.4.min.js"></script>
+<script type="text/javascript">
+
+
+    $("#send1").click(function () {
+        var intername=$("#intername").val();
+        var connect=$("#connect").val();
+        var bpar=$("#appaddform").serialize();
+
+        $.ajax({
+            type:"POST",
+            url:"${pageContext.request.contextPath}/linkmanager/addLinkmanager.json",
+            data:bpar,
+            dataType:"json",
+            success:function (data) {
+                if (data.status == "添加成功") {
+                    alert("添加成功！");
+                    <%--$("#Content").load("${pageContext.request.contextPath}/singlepageReservations/findSinglepageReservations");--%>
+
+                } else {
+                    alert(data.status);
+                }
+            },
+            error:function (data) {
+                alert("添加大失败");
+            }
+        });
+    });
+
+</script>
 </html>

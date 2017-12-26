@@ -34,7 +34,7 @@
 <div class="x_content">
 
     <form id="appaddform" class="form-horizontal form-label-left"
-          method="post" enctype="multipart/form-data" >
+          method="post">
 
         <p>请填写信息
 
@@ -42,12 +42,12 @@
         <span class="section"> </span>
 
         <div class="item form-group">
-            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="netname">网络名称
+            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">网络名称
                 <span class="required">*</span>
             </label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-                <input id="netname" class="form-control col-md-7 col-xs-12"
-                       name="netname" placeholder="请输入网络名称"
+                <input id="name" class="form-control col-md-7 col-xs-12"
+                       name="name" placeholder="请输入网络名称"
                        required="required" type="text">
 
             </div>
@@ -55,10 +55,10 @@
         </div>
         <div class="item form-group">
             <label class="control-label col-md-3 col-sm-3 col-xs-12"
-                   for="addess">域名地址<span class="required">*</span>
+                   for="adress">域名地址<span class="required">*</span>
             </label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="text" id="addess" name="addess" required="required"
+                <input type="text" id="adress" name="adress" required="required"
                        placeholder="请输入域名地址"
                        class="form-control col-md-7 col-xs-12">
 
@@ -68,11 +68,11 @@
 
         <div class="item form-group">
             <label class="control-label col-md-3 col-sm-3 col-xs-12"
-                   for="appInfo">站点描述 <span class="required">*</span>
+                   for="describe">站点描述 <span class="required">*</span>
             </label>
 
             <div class="col-md-6 col-sm-6 col-xs-12">
-                    <textarea id="appInfo" required="required" name="appInfo"
+                    <textarea id="describe" required="required" name="describe"
                               class="form-control col-md-7 col-xs-12"
                               placeholder="请输入站点描述。"></textarea>
 
@@ -99,17 +99,13 @@
         var netname=$("#netname").val();
         var addess=$("#addess").val();
         var appInfo=$("#appInfo").val();
-        var data="netname="+netname+"&addess="+addess+"&appInfo="+appInfo;
+        var bpar=$("#appaddform").serialize();
 
         $.ajax({
             type:"POST",
-            url:"${pageContext.request.contextPath}/basicsetting/addBasicsetting",
-            data:data,
+            url:"${pageContext.request.contextPath}/basicsetting/addBasicsetting.json",
+            data:bpar,
             dataType:"json",
-            async:false,
-            cache:false,
-            contentType:false,
-            processData:false,
             success:function (data) {
                 if (data.status == "添加成功") {
                     alert("添加成功！");
