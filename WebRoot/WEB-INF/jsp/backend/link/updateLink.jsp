@@ -42,25 +42,35 @@
         <span class="section"> </span>
 
         <div class="item form-group">
-            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">网站名称
+            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="id">id
+                <span class="required">*</span>
+            </label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <input id="id" class="form-control col-md-7 col-xs-12"
+                       name="id" readonly
+                       required="required" type="text" value="${LinkList.id}">
+            </div>
+        </div>
+        <div class="item form-group">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">网络名称
                 <span class="required">*</span>
             </label>
             <div class="col-md-6 col-sm-6 col-xs-12">
                 <input id="name" class="form-control col-md-7 col-xs-12"
                        name="name" placeholder="请输入网站名称"
-                       required="required" type="text">
+                       required="required" type="text" value="${LinkList.name}">
 
             </div>
             <span id="yzname"></span>
         </div>
         <div class="item form-group">
             <label class="control-label col-md-3 col-sm-3 col-xs-12"
-                   for="link">网站连接<span class="required">*</span>
+                   for="link">网络连接<span class="required">*</span>
             </label>
             <div class="col-md-6 col-sm-6 col-xs-12">
                 <input type="text" id="link" name="link" required="required"
                        placeholder="请输入网站连接"
-                       class="form-control col-md-7 col-xs-12">
+                       class="form-control col-md-7 col-xs-12" value="${LinkList.link}">
 
             </div>
             <span id="yzlink"></span>
@@ -71,7 +81,6 @@
         <div class="form-group">
             <div class="col-md-6 col-md-offset-3">
                 <button id="send1" type="button" class="btn btn-success">保存</button>
-                </input>
                 <button type="button" class="btn btn-primary">返回</button>
             </div>
         </div>
@@ -90,12 +99,12 @@
 
         $.ajax({
             type:"POST",
-            url:"${pageContext.request.contextPath}/linkmanager/addLinkmanager.json",
+            url:"${pageContext.request.contextPath}/linkmanager/changeLinkmanager.json",
             data:bpar,
             dataType:"json",
             success:function (data) {
-                if (data.status == "添加成功") {
-                    alert("添加成功！");
+                if (data.status == "修改成功") {
+                    alert("修改成功！");
                     <%--$("#Content").load("${pageContext.request.contextPath}/singlepageReservations/findSinglepageReservations");--%>
 
                 } else {
@@ -103,7 +112,7 @@
                 }
             },
             error:function (data) {
-                alert("添加大失败");
+                alert("修改大失败");
             }
         });
     });

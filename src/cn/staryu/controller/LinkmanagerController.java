@@ -106,4 +106,18 @@ public class LinkmanagerController {
 
         return "backend/link/addLink";
     }
+
+    //显示修改页面
+    @RequestMapping("/updateLink")
+    public String updateLink(Model model,String id){
+        Linkmanager linkmanager = null;
+        try {
+            linkmanager = linkmanagerService.findLinkmanagerByid(Integer.valueOf(id));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        model.addAttribute("LinkList",linkmanager);
+        return "backend/link/updateLink";
+    }
+
 }

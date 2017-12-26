@@ -100,11 +100,25 @@ public class BasicsettingController {
         return "";
     }
 
-    //显示添加
+    //显示添加页面
     @RequestMapping("/addshowBasic")
     public String addshowBasic() {
 
 
         return "backend/basice/addBasice";
     }
+
+    //显示修改页面
+    @RequestMapping("/updateBasic")
+    public String updateBasic(Model model,String id){
+        Basicsetting basicsetting = null;
+        try {
+            basicsetting = basicsettingService.findBasicsettingByid(Integer.valueOf(id));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        model.addAttribute("BasicList",basicsetting);
+        return "backend/basice/updateBasice";
+    }
+
 }

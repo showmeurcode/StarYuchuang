@@ -105,4 +105,18 @@ public class SinglepageReservationsController {
     public String addshowSing(){
         return "backend/sing/addSing";
     }
+
+    //显示修改页面
+    @RequestMapping("/updateSing")
+    public String updateSing(Model model,String id){
+        SinglepageReservations singlepageReservations = null;
+        try {
+            singlepageReservations = singlepageReservationsService.findSinglepageReservationsByid(Integer.valueOf(id));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        model.addAttribute("SingList",singlepageReservations);
+        return "backend/Sing/updateSing";
+    }
+
 }

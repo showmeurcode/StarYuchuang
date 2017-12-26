@@ -62,7 +62,7 @@
                                             <td>${res.name}</td>
 
 
-                                            <td><a class="btn btn-primary btn-sm" href="#" onclick="edittype('1')">&#x7F16;&#x8F91;</a>&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-danger btn-sm" href="#" onclick="del('1')">&#x5220;&#x9664;</a></td>
+                                            <td><a class="btn btn-primary btn-sm" href="#" onclick="edittype('${res.id}')">&#x7F16;&#x8F91;</a>&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-danger btn-sm" href="#" onclick="del('${res.id}')">&#x5220;&#x9664;</a></td>
                                         </tr>
                                     </c:forEach>
 
@@ -159,11 +159,11 @@
         var table = $('.dataTables-example').DataTable();
         layer.open({
             type : 2,
-            title : '课程修改',
+            title : '基础设置修改',
             maxmin : true,
             shadeClose : false, //点击遮罩关闭层
             area : [ '600px', '260px' ],
-            content : ['LessonTypeEdit.jsp?id=' + sid +'&pages='+ table.page() +'&pagesum='+ table.page.len(),'no'],
+            content : ['${pageContext.request.contextPath}/basicsetting/updateBasic?id=' + sid,'no'],
             end: function(){
                 var table = $('.dataTables-example').DataTable();
                 table.draw( false );
