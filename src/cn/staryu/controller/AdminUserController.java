@@ -4,13 +4,12 @@ import cn.staryu.pojo.AdminUser;
 import cn.staryu.service.admin_user.AdminUserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,64 +41,73 @@ public class AdminUserController {
         }else{
             request.setAttribute("error","用户名或密码不正确！");
 
-            return "backend/login";
+            return "adminlogin";
         }
 
 
     }
-    @RequestMapping("/loginout")
+    @RequestMapping("/Bloginout")
     public String loginout(HttpServletRequest request){//登出
         //    注销用户，使session失效。
         request.getSession().removeAttribute("adminUserSession");
 
-        return "backend/login";
+        return "adminlogin";
     }
+
+
+
 
     @RequestMapping("/adduser")//添加用户
-    public String addUser(@ModelAttribute("adminUser") AdminUser adminUser){
+    public Object addUser(@ModelAttribute("adminUser") AdminUser adminUser){
 
-        return "adminUser/useradd";
+        return "backend/AddUser";
 
     }
-    @RequestMapping("/addusersave")//保存用户
-    public String addUsersave(AdminUser adminUser){
+    @RequestMapping("/usersave")//保存用户
+    public Object addUsersave( AdminUser adminUser){
         int result=0;
+
         try {
+            adminUser.setRegisterDate(new Date());
             result=adminUserService.addUser(adminUser);
 
             if(result>0){
 
-                return "adminUser/addsave";
+                return "backend/addUsersave";
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return "adminUser/useradd";
+        return "backend/AddUser";
 
 
     }
 
-    @RequestMapping("/delete")//删除管理
-    public String delete(String id){
+    @RequestMapping("/deleteuser")//删除
+    @ResponseBody
+    public Object delete(@RequestParam String id){
         int result=0;
 
         try {
-            result = adminUserService.deleteUser(Integer.parseInt(id));
-            if (result>0){
 
-                return  "删除成功";
-            }
+            result = adminUserService.deleteUser(Integer.parseInt(id));
+
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return  "删除页面";
+        if(result>0){
+            return "{\"status\":\"success\"}";
+        }else {
+            return "{\"status\":\"error\"}";
+        }
+
 
 
     }
 
     @RequestMapping("/upeateUserbyid")//获取用户信息
-    public String getUserById(@RequestParam String id, Model model){
+    public String  getUserById(@RequestParam String id, Model model){
 
         try {
             AdminUser adminUser=adminUserService.findUserById(Integer.parseInt(id));
@@ -110,24 +118,31 @@ public class AdminUserController {
             e.printStackTrace();
         }
 
-        return "修改页";
+        return "backend/updateUser";
 
     }
-    @RequestMapping("/upeateUser")//修改保存
-    public String updateadminsave(@ModelAttribute("adminUser") AdminUser adminUser){
+    @RequestMapping("/userupdatesave")//修改数据保存
+    public String userupdatesave(AdminUser adminUser, HttpSession session){
 
         int result=0;
 
         try {
+            adminUser.setModifyBy(((AdminUser)session.getAttribute("adminUserSession")).getId());
+            adminUser.setRegisterDate(new Date());
+
             result=adminUserService.updateUser(adminUser);
 
             if(result>0){
-                return "用户列表页";
+
+                return "backend/update";
+
             }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return "修改页";
+
+        return "backend/updateUser";
 
     }
 
@@ -135,15 +150,23 @@ public class AdminUserController {
     public String select(@RequestParam String adminName,Model model){
 
         AdminUser adminUser=null;
+        boolean data=true;
 
         try {
             adminUser= adminUserService.findUserByname(adminName);
-            model.addAttribute("adminUser",adminUser);
+
+            model.addAttribute(adminUser);
+            if(adminName.equals("")&&adminName==null){
+
+                data=false;
+
+                return ""+data;
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return "查询页面";
+        return ""+data;
 
     }
 
@@ -158,7 +181,7 @@ public class AdminUserController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return "显示用户集合页面";
+        return "backend/CustomerManage";
 
     }
 

@@ -12,6 +12,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -32,18 +33,18 @@ public class DevUserController {
         try {
             devUser1=devUserService.finduserLogin(devUser.getDevName(),devUser.getDevPassword());
         } catch (Exception e) {
+
             e.printStackTrace();
         }
         if(devUser1 != null){
             //放入session
             session.setAttribute("devUserSession", devUser1);
 
-
-            return "developer/frame";
+            return "pre/index";
         }else{
             request.setAttribute("error","用户名或密码不正确！");
 
-            return "developer/login";
+            return "prelogin";
         }
 
 
@@ -53,16 +54,16 @@ public class DevUserController {
         //    注销用户，使session失效。
         request.getSession().removeAttribute("devUserSession");
 
-        return "developer/login";
+        return "prelogin";
     }
 
     @RequestMapping("/adduser")//添加用户
     public String addUser(@ModelAttribute("devUser") DevUser devUser){
 
-        return "deleloper/useradd";
+        return "pre/AddUser";
 
     }
-    @RequestMapping("/addusersave")//保存用户
+    @RequestMapping("/usersave")//保存用户
     public String addUsersave(DevUser devUser){
         int result=0;
         try {
@@ -70,30 +71,32 @@ public class DevUserController {
 
             if(result>0){
 
-                return "deleloper/addsave";
+                return "pre/addUsersave";
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return "deleloper/useradd";
+        return "pre/useradd";
 
 
     }
 
-    @RequestMapping("/delete")//删除用户
+    @RequestMapping("/deleteuser")//删除用户
     public String delete(String id,Model model){
         int result=0;
 
         try {
             result = devUserService.deleteUser(Integer.parseInt(id));
-            if (result>0){
-                return  "删除成功";
-            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return  "删除页面";
+        if(result>0){
+            return "{\"status\":\"success\"}";
+        }else {
+            return "{\"status\":\"error\"}";
+        }
 
 
     }
@@ -111,26 +114,27 @@ public class DevUserController {
             e.printStackTrace();
         }
 
-        return "修改页";
+        return "pre/updateUser";
 
     }
-    @RequestMapping("/upeateUser")//修改保存
-    public String updateusersave(@ModelAttribute("devUser") DevUser devUser){
+    @RequestMapping("/userupdatesave")//修改保存
+    public String updateusersave( DevUser devUser){
 
         int result=0;
 
         try {
+            devUser.setRegisterDate(new Date());
             result=devUserService.updateUser(devUser);
 
             if(result>0){
 
-                return "用户列表页";
+                return "pre/update";
 
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return "修改页";
+        return "pre/updateUser";
 
     }
 
@@ -163,7 +167,7 @@ public class DevUserController {
     } catch (Exception e) {
         e.printStackTrace();
     }
-    return "显示用户集合页面";
+    return "pre/UserManage";
 
 
 }

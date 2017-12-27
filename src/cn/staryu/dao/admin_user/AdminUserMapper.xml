@@ -32,6 +32,7 @@
             <if test="phone != null">phone=#{phone},</if>
             <if test="jurisdiction != null">jurisdiction=#{jurisdiction},</if>
             <if test="registerDate != null">registerDate=#{registerDate},</if>
+            <if test="registerDate != null">modifyBy=#{modifyBy},</if>
 
         </set>
 

@@ -1,6 +1,7 @@
 package cn.staryu.pojo;
 
-import java.sql.Date;
+
+import java.util.Date;
 
 /**
  * @author kongxiangzhong

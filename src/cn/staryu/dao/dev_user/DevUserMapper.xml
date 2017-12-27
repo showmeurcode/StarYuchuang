@@ -49,14 +49,14 @@
 
 
     <!-- 验证登录-->
-    <select id="findLoginUser" resultType="DevUser">
+    <select id="findLoginUser" resultType="cn.staryu.pojo.DevUser">
         SELECT * FROM dev_user u
 
-        WHERE u.devName = #{devName} and u.devPassword=#{devPassword}
+        WHERE u.devName=#{devName} and u.devPassword=#{devPassword}
 
     </select>
 
-    <select id="findAllDevUser" resultType="DevUser">
+    <select id="findAllDevUser" resultType="cn.staryu.pojo.DevUser">
 
         SELECT * FROM dev_user
 

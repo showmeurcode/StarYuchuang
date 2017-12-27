@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%
+
     response.setHeader("Cache-Control","no-store");
     response.setDateHeader("Expires", 0);
     response.setHeader("Pragma","no-cache");
@@ -24,7 +25,7 @@
     <!--[if lt IE 9]>
     <meta http-equiv="refresh" content="0;ie.html" />
     <![endif]-->
-    <script type="text/javascript">document.oncontextmenu=function(){ return false }</script>
+<script type="text/javascript">document.oncontextmenu=function(){ return false }</script>
     <link rel="shortcut icon" href="favicon.ico">
     <link href="${pageContext.request.contextPath}/statics/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/statics/css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
@@ -94,7 +95,7 @@
                     </a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a class="J_menuItem" href="Customer/CustomerManage.jsp" ondragstart="return false">管理员管理</a>
+                            <a class="J_menuItem" href="${pageContext.request.contextPath}/adminuser/selectfindUser" ondragstart="return false">管理员管理</a>
                         </li>
 
                     </ul>

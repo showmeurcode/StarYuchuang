@@ -56,7 +56,8 @@ public class DevUserServiceImpl implements DevUserService {
 
     @Override
     public DevUser finduserLogin(String devName, String devPassword) throws Exception {
-        return null;
+
+        return devUserMapper.findLoginUser(devName,devPassword);
     }
 
 

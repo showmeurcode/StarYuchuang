@@ -46,7 +46,7 @@ response.setHeader("Pragma","no-cache");
                             <span><img alt="image" class="img-circle" src="img/profile_small.jpg" /></span>
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                                 <span class="clear">
-                               <span class="block m-t-xs"><strong class="font-bold">&nbsp;&nbsp;&nbsp;用户名</strong></span>
+                               <span class="block m-t-xs"><strong class="font-bold">&nbsp;&nbsp;&nbsp;${sessionScope.devUserSession.devName}</strong></span>
                                 <span class="text-muted text-xs block">部门 <b class="caret"></b></span>
                                 </span>
                             </a>
@@ -104,7 +104,7 @@ response.setHeader("Pragma","no-cache");
                     <li>
                         <a href="#" ondragstart="return false"><i class="fa fa-credit-card"></i> <span class="nav-label">用户管理</span><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
-                            <li><a class="J_menuItem" href="ProjectManage/ProjectManage.jsp" ondragstart="return false">用户管理</a>
+                            <li><a class="J_menuItem" href="${pageContext.request.contextPath}/devuser/selectfindUser" ondragstart="return false">用户管理</a>
                    
                         </ul>
                     </li>
@@ -190,7 +190,7 @@ response.setHeader("Pragma","no-cache");
                         </li>
                     </ul>
                 </div>
-                <a href="login.jsp" class="roll-nav roll-right J_tabExit"><i class="fa fa fa-sign-out"></i> 退出</a>
+                <a href="loginout.html" class="roll-nav roll-right J_tabExit"><i class="fa fa fa-sign-out"></i> 退出</a>
             </div>
             <div class="row J_mainContent" id="content-main">
                 <iframe class="J_iframe" name="iframe0" width="100%" height="100%" src="index_v148b2.html?v=4.0" frameborder="0" data-id="index_v1.html" seamless></iframe>

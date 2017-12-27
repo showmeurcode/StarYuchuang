@@ -1,6 +1,9 @@
 package cn.staryu.pojo;
 
-import java.sql.Date;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.util.Date;
+
 
 /**
  * @author kongxiangzhong
@@ -19,6 +22,9 @@ public class AdminUser {
     private String jurisdiction;//权限值
 
     private Date registerDate;//创建时间
+
+    //更新者（来源于dev_user开发者信息表的用户id）
+    private int modifyBy;
 
     public int getId() {
         return id;
@@ -66,5 +72,13 @@ public class AdminUser {
 
     public void setRegisterDate(Date registerDate) {
         this.registerDate = registerDate;
+    }
+
+    public int getModifyBy() {
+        return modifyBy;
+    }
+
+    public void setModifyBy(int modifyBy) {
+        this.modifyBy = modifyBy;
     }
 }
