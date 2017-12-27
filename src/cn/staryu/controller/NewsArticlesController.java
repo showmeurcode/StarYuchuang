@@ -114,20 +114,10 @@ public class NewsArticlesController {
 
     /**
      * 显示所有新闻列表
-     * @param model
      * @return
      */
-    @RequestMapping("/showAllAtricles")
-    public String findAllAtricles(Model model){
-
-        NewsArticles newsArticles = new NewsArticles();
-        List<NewsArticles> list = new ArrayList<NewsArticles>();
-        try {
-            list = newsArticlesService.findArticlesByInfo(newsArticles);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        model.addAttribute("articlesList",list);
+    @RequestMapping("/showAtricleslist")
+    public String showAtricleslist(){
         return "backend/newsArticles/newslist";
     }
 
@@ -210,5 +200,31 @@ public class NewsArticlesController {
         model.addAttribute("newsClassifyList",list);
         return "backend/newsArticles/updateNewsArticles";
     }
+
+
+    @RequestMapping("/showAllArticles")
+    @ResponseBody
+    public Object showAllArticles(){
+        StringBuffer html = new StringBuffer("");
+
+        List<NewsArticles> list = new ArrayList<>();
+        NewsArticles newsArticles = new NewsArticles();
+
+        try {
+            list = newsArticlesService.findArticlesByInfo(newsArticles);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        for (NewsArticles articles:list) {
+            html.append(" <tr>" +
+                    "                                            <td>"+articles.getId()+"</td>" +
+                    "                                            <td>"+articles.getTitle()+"</td>" +
+                    "                                            <td><a class='btn btn-primary btn-sm' href='#' onclick='edittype("+articles.getId()+")'>&#x7F16;&#x8F91;</a>&nbsp;&nbsp;&nbsp;&nbsp;<a class='btn btn-danger btn-sm' href='#' onclick='del("+articles.getId()+")'>&#x5220;&#x9664;</a></td>" +
+                    "                                        </tr>");
+        }
+
+        return html.toString();
+    }
+
 
 }

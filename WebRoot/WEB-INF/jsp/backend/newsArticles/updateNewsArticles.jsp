@@ -57,6 +57,7 @@
     <!-- 注意， 只需要引用 JS，无需引用任何 CSS ！！！-->
     <script type="text/javascript" src="${pageContext.request.contextPath}/statics/js/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/statics/js/wangEditor.js"></script>
+    <script src="${pageContext.request.contextPath}/statics/js/plugins/layer/layer.js"></script>
     <script type="text/javascript">
         var E = window.wangEditor;
         var editor = new E('#div1');
@@ -98,16 +99,23 @@
                     dataType:"json",
                     success:function (data) {
                         if (data.status == "success") {
-                            alert("修改成功");
+                            layer.msg('保存成功！',{
+                                icon: 1,
+                                time: 1500
+                            }, function(){
+                                var index = parent.layer.getFrameIndex(window.name);
+                                parent.layer.close(index);
+                            });
                         } else {
-                            alert(data.status);
+                            layer.msg('保存失败！',{
+                                icon: 1,
+                                time: 1500
+                            }, function(){
+                                var index = parent.layer.getFrameIndex(window.name);
+                                parent.layer.close(index);
+                            });
                         }
 
-                    },
-                    error:function (XMLHttpRequest, textStatus, errorThrown) {
-                        alert("XMLHttpRequest.status："+XMLHttpRequest.status);
-                        alert("XMLHttpRequest.readyState："+XMLHttpRequest.readyState);
-                        alert("textStatus："+textStatus);
                     }
 
                 });

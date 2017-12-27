@@ -46,7 +46,7 @@
 
 
 
-                                <table class="table table-striped table-bordered table-hover dataTables-example">
+                                <table class="table table-striped table-bordered table-hover dataTables-example" id="articlesTable">
                                     <thead>
                                     <tr>
                                         <th style="text-align:center; width:10%;">序号</th>
@@ -55,16 +55,7 @@
 
                                     </tr>
                                     </thead>
-                                    <tbody style="text-align:center;">
-                                    <c:forEach var="atricles" items="${articlesList}">
-
-                                        <tr>
-                                            <td>${atricles.id}</td>
-                                            <td>${atricles.title}</td>
-                                            <td><a class="btn btn-primary btn-sm" href="#" onclick="edittype('${atricles.id}')">&#x7F16;&#x8F91;</a>&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-danger btn-sm" href="#" onclick="del('${atricles.id}')">&#x5220;&#x9664;</a></td>
-                                        </tr>
-
-                                    </c:forEach>
+                                    <tbody style="text-align:center;" id="tbody">
 
                                     </tbody>
                                     <tfoot>
@@ -98,6 +89,50 @@
 
 <script>
 
+
+    var table;
+
+    function showAllArticles() {
+        $.ajax({
+            type:"GET",
+            url:"${pageContext.request.contextPath}/newsAtricles/showAllArticles",
+            dataType:"html",
+            success:function (data) {
+                $("#tbody").html(data);
+                table=$('#articlesTable').DataTable({
+                    "bLengthChange": true, //是否显示修改显示数据数量的菜单
+                    "iDisplayLength": 10,//设置每页默认显示多少数据
+                    "pagingType": "full_numbers",
+                    language: {
+                        "sProcessing": "处理中...",
+                        "sLengthMenu": "显示 _MENU_ 项结果",
+                        "sZeroRecords": "没有匹配结果",
+                        "sInfo": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
+                        "sInfoEmpty": "显示第 0 至 0 项结果，共 0 项",
+                        "sInfoFiltered": "(由 _MAX_ 项结果过滤)",
+                        "sInfoPostFix": "",
+                        "sSearch": "搜索:",
+                        "sUrl": "",
+                        "sEmptyTable": "表中数据为空",
+                        "sLoadingRecords": "载入中...",
+                        "sInfoThousands": ",",
+                        "oPaginate": {
+                            "sFirst": "首页",
+                            "sPrevious": "上页",
+                            "sNext": "下页",
+                            "sLast": "末页"
+                        },
+                        "oAria": {
+                            "sSortAscending": ": 以升序排列此列",
+                            "sSortDescending": ": 以降序排列此列"
+                        }
+                    }
+                });
+            }
+        });
+    }
+    
+
     function del(sid) {
         swal({
             title: "您确定要删除这条信息吗",
@@ -114,11 +149,11 @@
                 data: {
                     "id": sid
                 }, success: function (data) {
-                    //table.ajax.reload();
                     if (data.status="success"){
                         setTimeout(function(){swal("删除成功！", "您已经永久删除了这条信息。", "success");},100);
-                        var table = $('.dataTables-example').DataTable();
-                        table.draw( false );
+//                        table.ajax.reload();
+//                        table.draw( false );
+                        showAllArticles();
                     }else if (data.status="error"){
                         setTimeout(function(){swal("删除失败！", "此信息没有执行删除操作。", "error");},100);
                     }
@@ -131,30 +166,26 @@
 
     function init(str,str2){
 
-        var table = $('.dataTables-example').DataTable();
         table.page.len( str2 ).draw();
         table.page(str).draw( false );
     }
-</script>
-<script>
+
     $(document).ready(function() {
+
+        showAllArticles();
+
         $("#loading-example-btn").click(function() {
-            var table = $('.dataTables-example').DataTable();
             var pps=table.page();
 
         });
     });
     function delet(btn,state) {
 
-        var table = $('.dataTables-example').DataTable();
-
         table.row(3).remove().draw( false );
-
 
 
     };
     function edittype(sid) {
-        var table = $('.dataTables-example').DataTable();
         layer.open({
             type : 2,
             title : '修改文章',
@@ -163,8 +194,7 @@
             area : [ '600px', '260px' ],
             content : ['${pageContext.request.contextPath}/newsAtricles/update?id=' + sid,'no'],
             end: function(){
-                var table = $('.dataTables-example').DataTable();
-                table.draw( false );
+                showAllArticles();
             }
 
         });
@@ -178,8 +208,7 @@
             area : [ '600px', '260px' ],
             content : '${pageContext.request.contextPath}/newsAtricles/add',
             end: function(){
-                var table = $('.dataTables-example').DataTable();
-                table.draw( false );
+                showAllArticles();
             }
         });
     }
