@@ -34,7 +34,7 @@
 <div class="x_content">
 
     <form id="appaddform" class="form-horizontal form-label-left"
-          method="post">
+          method="post" action="${pageContext.request.contextPath }/linkmanager/changeLinkmanager">
 
         <p>请填写信息
 
@@ -80,8 +80,8 @@
         <div class="ln_solid"></div>
         <div class="form-group">
             <div class="col-md-6 col-md-offset-3">
-                <button id="send1" type="button" class="btn btn-success">保存</button>
-                <button type="button" class="btn btn-primary">返回</button>
+                <button id="send1" type="submit" class="btn btn-success">保存</button>
+                <button id="send2" type="button" class="btn btn-primary">返回</button>
             </div>
         </div>
     </form>
@@ -90,32 +90,63 @@
 </body>
 <script type="text/javascript" src="${pageContext.request.contextPath }/statics/js/jquery-1.4.4.min.js"></script>
 <script type="text/javascript">
-
+    var flag = false;
 
     $("#send1").click(function () {
-        var intername=$("#intername").val();
-        var connect=$("#connect").val();
-        var bpar=$("#appaddform").serialize();
+        if (flag) {
+            <%--var bpar=$("#appaddform").serialize();--%>
 
-        $.ajax({
-            type:"POST",
-            url:"${pageContext.request.contextPath}/linkmanager/changeLinkmanager.json",
-            data:bpar,
-            dataType:"json",
-            success:function (data) {
-                if (data.status == "修改成功") {
-                    alert("修改成功！");
-                    <%--$("#Content").load("${pageContext.request.contextPath}/singlepageReservations/findSinglepageReservations");--%>
+            <%--$.ajax({--%>
+            <%--type:"POST",--%>
+            <%--url:"${pageContext.request.contextPath}/linkmanager/changeLinkmanager.json",--%>
+            <%--data:bpar,--%>
+            <%--dataType:"json",--%>
+            <%--success:function (data) {--%>
+            <%--if (data.status == "修改成功") {--%>
+            <%--alert("修改成功！");--%>
+            <%--&lt;%&ndash;$("#Content").load("${pageContext.request.contextPath}/singlepageReservations/findSinglepageReservations");&ndash;%&gt;--%>
 
-                } else {
-                    alert(data.status);
-                }
-            },
-            error:function (data) {
-                alert("修改大失败");
-            }
-        });
+            <%--} else {--%>
+            <%--alert(data.status);--%>
+            <%--}--%>
+            <%--},--%>
+            <%--error:function (data) {--%>
+            <%--alert("修改大失败");--%>
+            <%--}--%>
+            <%--});--%>
+        }else{
+            alert("填写不符合，无法保存");
+            return false;
+        }
+
     });
 
+
+    $("#name").blur(function () {
+        var name=$("#name").val();
+        if (name == "" || name == null) {
+            flag = false;
+            $("#yzname").html("网站名称不能为空")
+        } else {
+            $("#yzname").html("");
+            flag = true;
+        }
+    });
+
+    $("#link").blur(function () {
+        var link=$("#link").val();
+        if (link == "" || link == null) {
+            flag = false;
+            $("#yzlink").html("网站链接不能为空")
+        } else {
+            $("#yzlink").html("");
+            flag = true;
+        }
+    });
+
+    $("#send2").click(function () {
+        var index = parent.layer.getFrameIndex(window.name);
+        parent.layer.close(index);
+    });
 </script>
 </html>

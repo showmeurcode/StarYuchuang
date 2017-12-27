@@ -34,7 +34,7 @@
 <div class="x_content">
 
     <form id="appaddform" class="form-horizontal form-label-left"
-          method="post">
+          method="post" action="${pageContext.request.contextPath}/basicsetting/addBasicsetting">
 
         <p>请填写信息
 
@@ -83,8 +83,9 @@
         <div class="ln_solid"></div>
         <div class="form-group">
             <div class="col-md-6 col-md-offset-3">
-                <button id="send1" type="button" class="btn btn-success">保存</button>
-                <button type="button" class="btn btn-primary">返回</button>
+                <button id="send1" type="submit" class="btn btn-success">保存</button>
+                <button id="send2" type="button" class="btn btn-primary" onClick="custom_close()" >返回</button>
+
             </div>
         </div>
     </form>
@@ -97,26 +98,25 @@
 
     $("#send1").click(function () {
         if (flag) {
-            var bpar=$("#appaddform").serialize();
+            <%--var bpar=$("#appaddform").serialize();--%>
 
-            $.ajax({
-                type:"POST",
-                url:"${pageContext.request.contextPath}/basicsetting/addBasicsetting.json",
-                data:bpar,
-                dataType:"json",
-                success:function (data) {
-                    if (data.status == "添加成功") {
-                        alert("添加成功！");
-                        $("#Content").load("${pageContext.request.contextPath}/basicsetting/findBasicsetting");
+            <%--$.ajax({--%>
+                <%--type:"POST",--%>
+                <%--url:"${pageContext.request.contextPath}/basicsetting/addBasicsetting.json",--%>
+                <%--data:bpar,--%>
+                <%--dataType:"json",--%>
+                <%--success:function (data) {--%>
+                    <%--if (data.status == "添加成功") {--%>
+                        <%--alert("添加成功！");--%>
 
-                    } else {
-                        alert(data.status);
-                    }
-                },
-                error:function (data) {
-                    alert("添加大失败");
-                }
-            });
+                    <%--} else {--%>
+                        <%--alert(data.status);--%>
+                    <%--}--%>
+                <%--},--%
+                <%--error:function (data) {--%>
+                    <%--alert("添加大失败");--%>
+                <%--}--%>
+            <%--});--%>
         }else {
             alert("填写不符合，无法保存");
             return false;
@@ -130,9 +130,28 @@
         if (name == "" || name == null) {
             flag = false;
             $("#yzname").html("网络名称不能为空")
-        } else {
-            $("#yzname").html("");
-            flag = true;
+        }  else {
+            $.ajax({
+                type:"POST",
+                url:"${pageContext.request.contextPath}/basicsetting/nameSole.json",
+                data:"name="+name,
+                dataType:"json",
+                success:function (data) {
+                    if (data.status == "success") {
+                        $("#yzname").html("网络名称可以使用");
+                        flag = true;
+                    } else {
+                        $("#yzname").html("网络名称已存在");
+                        flag = false;
+                    }
+
+                },
+                error:function (XMLHttpRequest, textStatus, errorThrown) {
+                    alert("XMLHttpRequest.status："+XMLHttpRequest.status);
+                    alert("XMLHttpRequest.readyState："+XMLHttpRequest.readyState);
+                    alert("textStatus："+textStatus);
+                }
+            });
         }
     });
 
@@ -141,9 +160,28 @@
         if (adress == "" || adress == null) {
             flag = false;
             $("#yzaddess").html("域名地址不能为空")
-        } else {
-            $("#yzaddess").html("");
-            flag = true;
+        }  else {
+            $.ajax({
+                type:"POST",
+                url:"${pageContext.request.contextPath}/basicsetting/adressSole.json",
+                data:"name="+name,
+                dataType:"json",
+                success:function (data) {
+                    if (data.status == "success") {
+                        $("#yzaddess").html("网络地址可以使用");
+                        flag = true;
+                    } else {
+                        $("#yzaddess").html("网络地址已存在");
+                        flag = false;
+                    }
+
+                },
+                error:function (XMLHttpRequest, textStatus, errorThrown) {
+                    alert("XMLHttpRequest.status："+XMLHttpRequest.status);
+                    alert("XMLHttpRequest.readyState："+XMLHttpRequest.readyState);
+                    alert("textStatus："+textStatus);
+                }
+            });
         }
     });
 
@@ -157,6 +195,15 @@
             flag = true;
         }
     });
+
+    $("#send2").click(function () {
+        var index = parent.layer.getFrameIndex(window.name);
+        parent.layer.close(index);
+    });
+
+
+
+
 
 </script>
 </html>

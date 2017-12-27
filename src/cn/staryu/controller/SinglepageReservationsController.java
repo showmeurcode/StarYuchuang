@@ -23,8 +23,7 @@ public class SinglepageReservationsController {
 
     //添加后判断
     @RequestMapping("/addSinglepageReservations")
-    @ResponseBody
-    public Object addSinglepageReservations(SinglepageReservations singlepageReservations){
+    public String addSinglepageReservations(SinglepageReservations singlepageReservations){
         int rest=0;
         try {
             rest=singlepageReservationsService.addSinglepageReservations(singlepageReservations);
@@ -33,17 +32,16 @@ public class SinglepageReservationsController {
             e.printStackTrace();
         }
         if(rest>0){
-            return "{\"status\":\"添加成功！\"}";
+            return "backend/sing/ShowSing";
         }
 
 
-        return "{\"status\":\"添加失败！\"}";
+        return "backend/sing/SingManage";
     }
 
     //修改
     @RequestMapping("/changeSinglepageReservations")
-    @ResponseBody
-    public Object changeSinglepageReservations(SinglepageReservations singlepageReservations){
+    public String changeSinglepageReservations(SinglepageReservations singlepageReservations){
         int rest=0;
         try {
             rest=singlepageReservationsService.updateSinglepageReservations(singlepageReservations);
@@ -51,9 +49,9 @@ public class SinglepageReservationsController {
             e.printStackTrace();
         }
         if (rest>0){
-            return "{\"status\":\"修改成功！\"}";
+            return "backend/sing/ShowSing";
         }
-        return "{\"status\":\"修改失败！\"}";
+        return "backend/sing/SingManage";
     }
 
     //删除

@@ -23,8 +23,7 @@ public class BasicsettingController {
 
     //添加后判断
     @RequestMapping("/addBasicsetting")
-    @ResponseBody
-    public Object addBasicsetting(Basicsetting basicsetting) {
+    public String addBasicsetting(Basicsetting basicsetting) {
         int rest = 0;
         try {
             rest = basicsettingService.addBasicsetting(basicsetting);
@@ -33,17 +32,16 @@ public class BasicsettingController {
             e.printStackTrace();
         }
         if (rest > 0) {
-            return "{\"status\":\"添加成功！\"}";
+            return "backend/basice/ShowBasice";
         }
 
 
-        return "{\"status\":\"添加失败！\"}";
+        return "backend/basice/BasiceManage";
     }
 
     //修改
     @RequestMapping("/changeBasicsetting")
-    @ResponseBody
-    public Object changeBasicsetting(Basicsetting basicsetting) {
+    public String changeBasicsetting(Basicsetting basicsetting) {
         int rest = 0;
         try {
             rest = basicsettingService.updateBasicsetting(basicsetting);
@@ -51,9 +49,9 @@ public class BasicsettingController {
             e.printStackTrace();
         }
         if (rest > 0) {
-            return "{\"status\":\"修改成功！\"}";
+            return "backend/basice/ShowBasice";
         }
-        return "{\"status\":\"修改失败！\"}";
+        return "backend/basice/BasiceManage";
     }
 
     //删除
@@ -121,4 +119,41 @@ public class BasicsettingController {
         return "backend/basice/updateBasice";
     }
 
+    //网络名称唯一性
+    @RequestMapping("/nameSole")
+    @ResponseBody
+    public Object nameSole(String name){
+        Basicsetting basicsetting = new Basicsetting();
+        List<Basicsetting> list = new ArrayList<Basicsetting>();
+        try {
+            list = basicsettingService.findBasicsettingsByinfo(basicsetting);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        for (Basicsetting basicsetting1 : list) {
+            if (basicsetting1.getName().equals(name)){
+                return "{\"status\":\"error\"}";
+            }
+        }
+        return "{\"status\":\"success\"}";
+    }
+
+    //网络地址唯一性
+    @RequestMapping("/adressSole")
+    @ResponseBody
+    public Object adressSole(String adress){
+        Basicsetting basicsetting = new Basicsetting();
+        List<Basicsetting> list = new ArrayList<Basicsetting>();
+        try {
+            list = basicsettingService.findBasicsettingsByinfo(basicsetting);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        for (Basicsetting basicsetting1 : list) {
+            if (basicsetting1.getAdress().equals(adress)){
+                return "{\"status\":\"error\"}";
+            }
+        }
+        return "{\"status\":\"success\"}";
+    }
 }

@@ -34,7 +34,7 @@
 <div class="x_content">
 
     <form id="appaddform" class="form-horizontal form-label-left"
-          method="post">
+          method="post" action="${pageContext.request.contextPath}/singlepageReservations/changeSinglepageReservations">
 
         <p>请填写信息
 
@@ -130,8 +130,8 @@
         <div class="ln_solid"></div>
         <div class="form-group">
             <div class="col-md-6 col-md-offset-3">
-                <button id="send1" type="button" class="btn btn-success">保存</button>
-                <button type="button" class="btn btn-primary">返回</button>
+                <button id="send1" type="submit" class="btn btn-success">保存</button>
+                <button id="send2" type="button" class="btn btn-primary">返回</button>
             </div>
         </div>
     </form>
@@ -140,37 +140,97 @@
 </body>
 <script type="text/javascript" src="${pageContext.request.contextPath }/statics/js/jquery-1.4.4.min.js"></script>
 <script type="text/javascript">
-
+    var flag = false;
 
     $("#send1").click(function () {
-        var enrolment=$("#enrolment").val();
-        var name=$("#name").val();
-        var age=$("#age").val();
-        var email=$("#email").val();
-        var phone=$("#phone").val();
-        var information=$("#information").val();
-        var bpar=$("#appaddform").serialize();
+        if (flag) {
+//            var bpar=$("#appaddform").serialize();
 //        alert(bpar);
 
-        $.ajax({
-            type:"POST",
-            url:"${pageContext.request.contextPath}/singlepageReservations/changeSinglepageReservations.json",
-            data:bpar,
-            dataType:"json",
-            success:function (data) {
-                if (data.status == "修改成功") {
-                    alert("修改成功！");
-                    <%--$("#Content").load("${pageContext.request.contextPath}/singlepageReservations/findSinglepageReservations");--%>
+            <%--$.ajax({--%>
+                <%--type:"POST",--%>
+                <%--url:"${pageContext.request.contextPath}/singlepageReservations/changeSinglepageReservations.json",--%>
+                <%--data:bpar,--%>
+                <%--dataType:"json",--%>
+                <%--success:function (data) {--%>
+                    <%--if (data.status == "修改成功") {--%>
+                        <%--alert("修改成功！");--%>
+                        <%--&lt;%&ndash;$("#Content").load("${pageContext.request.contextPath}/singlepageReservations/findSinglepageReservations");&ndash;%&gt;--%>
 
-                } else {
-                    alert(data.status);
-                }
-            },
-            error:function (data) {
-                alert("修改大失败");
-            }
-        });
+                    <%--} else {--%>
+                        <%--alert(data.status);--%>
+                    <%--}--%>
+                <%--},--%>
+                <%--error:function (data) {--%>
+                    <%--alert("修改大失败");--%>
+                <%--}--%>
+            <%--});--%>
+        }else {
+            alert("填写不符合，无法保存");
+            return false;
+        }
+
     });
 
+
+    $("#enrolment").blur(function () {
+        var enrolment=$("#enrolment").val();
+        if (enrolment == "" || enrolment == null) {
+            flag = false;
+            $("#yzenrolment").html("报名对象不能为空")
+        } else {
+            $("#yzenrolment").html("");
+            flag = true;
+        }
+    });
+
+    $("#name").blur(function () {
+        var name=$("#name").val();
+        if (name == "" || name == null) {
+            flag = false;
+            $("#yzname").html("姓名不能为空")
+        } else {
+            $("#yzname").html("");
+            flag = true;
+        }
+    });
+
+    $("#age").blur(function () {
+        var age=$("#age").val();
+        if (age == "" || age == null) {
+            flag = false;
+            $("#yzage").html("年龄不能为空")
+        } else {
+            $("#yzage").html("");
+            flag = true;
+        }
+    });
+
+    $("#email").blur(function () {
+        var email=$("#email").val();
+        if (email == "" || email == null) {
+            flag = false;
+            $("#yzemail").html("邮箱不能为空")
+        } else {
+            $("#yzemail").html("");
+            flag = true;
+        }
+    });
+
+    $("#phone").blur(function () {
+        var phone=$("#phone").val();
+        if (phone == "" || phone == null) {
+            flag = false;
+            $("#yzphone").html("电话不能为空")
+        } else {
+            $("#yzphone").html("");
+            flag = true;
+        }
+    });
+
+    $("#send2").click(function () {
+        var index = parent.layer.getFrameIndex(window.name);
+        parent.layer.close(index);
+    });
 </script>
 </html>

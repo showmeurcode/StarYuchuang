@@ -34,7 +34,7 @@
 <div class="x_content">
 
     <form id="appaddform" class="form-horizontal form-label-left"
-          method="post">
+          method="post" action="${pageContext.request.contextPath }/linkmanager/addLinkmanager">
 
         <p>请填写信息
 
@@ -70,9 +70,9 @@
         <div class="ln_solid"></div>
         <div class="form-group">
             <div class="col-md-6 col-md-offset-3">
-                <button id="send1" type="button" class="btn btn-success">保存</button>
+                <button id="send1" type="submit" class="btn btn-success">保存</button>
                 </input>
-                <button type="button" class="btn btn-primary">返回</button>
+                <button id="send2" type="button" class="btn btn-primary" window.close();>返回</button>
             </div>
         </div>
     </form>
@@ -85,26 +85,27 @@
 
     $("#send1").click(function () {
         if (flag) {
-            var bpar=$("#appaddform").serialize();
+            <%--var bpar=$("#appaddform").serialize();--%>
 
-            $.ajax({
-                type:"POST",
-                url:"${pageContext.request.contextPath}/linkmanager/addLinkmanager.json",
-                data:bpar,
-                dataType:"json",
-                success:function (data) {
-                    if (data.status == "添加成功") {
-                        alert("添加成功！");
-                        <%--$("#Content").load("${pageContext.request.contextPath}/singlepageReservations/findSinglepageReservations");--%>
+            <%--$.ajax({--%>
+                <%--type:"POST",--%>
+                <%--url:"${pageContext.request.contextPath}/linkmanager/addLinkmanager.json",--%>
+                <%--data:bpar,--%>
+                <%--dataType:"json",--%>
+                <%--success:function (data) {--%>
+                    <%--if (data.status == "添加成功") {--%>
+                        <%--alert("添加成功！");--%>
+                        <%--&lt;%&ndash;$("#Content").load("${pageContext.request.contextPath}/singlepageReservations/findSinglepageReservations");&ndash;%&gt;--%>
 
-                    } else {
-                        alert(data.status);
-                    }
-                },
-                error:function (data) {
-                    alert("添加大失败");
-                }
-            });
+                    <%--} else {--%>
+                        <%--alert(data.status);--%>
+                    <%--}--%>
+                <%--},--%>
+                <%--error:function (data) {--%>
+                    <%--alert("添加大失败");--%>
+                <%--}--%>
+            <%--});--%>
+
         }else{
             alert("填写不符合，无法保存");
             return false;
@@ -119,9 +120,28 @@
         if (name == "" || name == null) {
             flag = false;
             $("#yzname").html("网站名称不能为空")
-        } else {
-            $("#yzname").html("");
-            flag = true;
+        }  else {
+            $.ajax({
+                type:"POST",
+                url:"${pageContext.request.contextPath}/linkmanager/nameSole.json",
+                data:"name="+name,
+                dataType:"json",
+                success:function (data) {
+                    if (data.status == "success") {
+                        $("#yzname").html("网站名称可以使用");
+                        flag = true;
+                    } else {
+                        $("#yzname").html("网站名称已存在");
+                        flag = false;
+                    }
+
+                },
+                error:function (XMLHttpRequest, textStatus, errorThrown) {
+                    alert("XMLHttpRequest.status："+XMLHttpRequest.status);
+                    alert("XMLHttpRequest.readyState："+XMLHttpRequest.readyState);
+                    alert("textStatus："+textStatus);
+                }
+            });
         }
     });
 
@@ -131,10 +151,33 @@
             flag = false;
             $("#yzlink").html("网站链接不能为空")
         } else {
-            $("#yzlink").html("");
-            flag = true;
+            $.ajax({
+                type:"POST",
+                url:"${pageContext.request.contextPath}/linkmanager/linkSole.json",
+                data:"name="+name,
+                dataType:"json",
+                success:function (data) {
+                    if (data.status == "success") {
+                        $("#yzlink").html("网站链接可以使用");
+                        flag = true;
+                    } else {
+                        $("#yzlink").html("网站链接已存在");
+                        flag = false;
+                    }
+
+                },
+                error:function (XMLHttpRequest, textStatus, errorThrown) {
+                    alert("XMLHttpRequest.status："+XMLHttpRequest.status);
+                    alert("XMLHttpRequest.readyState："+XMLHttpRequest.readyState);
+                    alert("textStatus："+textStatus);
+                }
+            });
         }
     });
 
+    $("#send2").click(function () {
+        var index = parent.layer.getFrameIndex(window.name);
+        parent.layer.close(index);
+    });
 </script>
 </html>

@@ -23,8 +23,7 @@ public class LinkmanagerController {
 
     //增加后判断
     @RequestMapping("/addLinkmanager")
-    @ResponseBody
-    public Object addLinkmanager(Linkmanager linkmanager) {
+    public String addLinkmanager(Linkmanager linkmanager) {
         int rest = 0;
         try {
             rest = linkmanagerService.addLinkmanager(linkmanager);
@@ -32,17 +31,16 @@ public class LinkmanagerController {
             e.printStackTrace();
         }
         if (rest > 0) {
-            return "{\"status\":\"添加成功！\"}";
+            return "backend/link/ShowLink";
         }
 
 
-        return "{\"status\":\"添加失败！\"}";
+        return "backend/link/LinkManage";
     }
 
     //修改
     @RequestMapping("/changeLinkmanager")
-    @ResponseBody
-    public Object changeLinkmanager(Linkmanager linkmanager) {
+    public String changeLinkmanager(Linkmanager linkmanager) {
         int rest = 0;
         try {
             rest = linkmanagerService.updateLinkmanager(linkmanager);
@@ -50,9 +48,9 @@ public class LinkmanagerController {
             e.printStackTrace();
         }
         if (rest > 0) {
-            return "{\"status\":\"修改成功！\"}";
+            return "backend/link/ShowLink";
         }
-        return "{\"status\":\"修改失败！\"}";
+        return "backend/link/LinkManage";
 
     }
 
@@ -109,15 +107,52 @@ public class LinkmanagerController {
 
     //显示修改页面
     @RequestMapping("/updateLink")
-    public String updateLink(Model model,String id){
+    public String updateLink(Model model, String id) {
         Linkmanager linkmanager = null;
         try {
             linkmanager = linkmanagerService.findLinkmanagerByid(Integer.valueOf(id));
         } catch (Exception e) {
             e.printStackTrace();
         }
-        model.addAttribute("LinkList",linkmanager);
+        model.addAttribute("LinkList", linkmanager);
         return "backend/link/updateLink";
     }
 
+    //网站名称唯一性
+    @RequestMapping("/nameSole")
+    @ResponseBody
+    public Object nameSole(String name) {
+        Linkmanager linkmanager = new Linkmanager();
+        List<Linkmanager> list = new ArrayList<Linkmanager>();
+        try {
+            list = linkmanagerService.findLinkmanagerInfo(linkmanager);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        for (Linkmanager linkmanager1 : list) {
+            if (linkmanager1.getName().equals(name)) {
+                return "{\"status\":\"error\"}";
+            }
+        }
+        return "{\"status\":\"success\"}";
+    }
+
+    //网络地址唯一性
+    @RequestMapping("/linkSole")
+    @ResponseBody
+    public Object linkSole(String link) {
+        Linkmanager linkmanager = new Linkmanager();
+        List<Linkmanager> list = new ArrayList<Linkmanager>();
+        try {
+            list = linkmanagerService.findLinkmanagerInfo(linkmanager);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        for (Linkmanager linkmanager1 : list) {
+            if (linkmanager1.getLink().equals(link)) {
+                return "{\"status\":\"error\"}";
+            }
+        }
+        return "{\"status\":\"success\"}";
+    }
 }
