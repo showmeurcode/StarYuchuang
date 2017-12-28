@@ -64,14 +64,14 @@
         <div class="form-group">
             <label class="col-sm-3 control-label">密码：</label>
             <div class="col-sm-8">
-                <input id="adminPassword" name="adminPassword" class="form-control" type="text" value="${adminUser.adminPassword}">
+                <input id="adminPassword" name="adminPassword" class="form-control" type="text" value="${adminUser.adminPassword}" pattern="^\w{10,16}$" maxlength="16">
             </div>
 
         </div>
         <div class="form-group">
             <label class="col-sm-3 control-label">确认密码：</label>
             <div class="col-sm-8">
-                <input id="adminPassword2" name="adminPassword2" class="form-control" type="text" value="${adminUser.adminPassword}" >
+                <input id="adminPassword2" name="adminPassword2" class="form-control" type="text" value="${adminUser.adminPassword}" pattern="^\w{10,16}$" maxlength="16" >
                 <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 请再次输入您的密码</span>
             </div>
             <font color="#c00fff">*</font>
@@ -80,7 +80,7 @@
         <div class="form-group">
             <label class="col-sm-3 control-label">手机：</label>
             <div class="col-sm-8">
-                <input id="phone" name="phone" class="form-control" type="text" value="${adminUser.phone}" aria-required="true" aria-invalid="false" class="valid">
+                <input id="phone" name="phone" class="form-control" type="text" value="${adminUser.phone}" aria-required="true" aria-invalid="false" class="valid" maxlength="11">
             </div>
             <font color="#c00fff">*</font>
             <div id="phoneDiv" style="display: inline; color:red"></div>
@@ -105,8 +105,8 @@
         </div>
         <div class="form-group">
             <div class="col-sm-8 col-sm-offset-3">
-                <button class="btn btn-primary" type="submit" id="submit" href="#">保存</button>&nbsp;&nbsp;&nbsp;&nbsp;
-                <button class="btn btn-primary" type="back" id="back" href="#">返回</button>
+                <button class="btn btn-primary" type="submit" id="submit" href="#">保存</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <button class="btn btn-primary" type="button" id="back" onclick="history.go(-1)">返回</button>
 
             </div>
         </div>
@@ -123,6 +123,86 @@
 <script src="${pageContext.request.contextPath}/statics/js/plugins/sweetalert/sweetalert.min.js"></script>
 <script src="${pageContext.request.contextPath}/statics/layer/layer.js"></script>
 <script type="text/javascript">
+
+    $(function () {
+        var open=false;
+        var open2=false;
+        var open3=false;
+
+        // 用户名
+
+        $("#adminName").blur( function() {
+
+            var name = $("#adminName").val();
+
+            if (name == null || name == "") {
+                $("#adminNameDiv").html("用户名不能为空！");
+                return;
+            } else {
+                $("#adminNameDiv").html("");
+                open=true;
+
+            }
+        });
+
+        // 密码
+        $("#adminPassword2").blur(function() {
+            var password1 = $("#adminPassword").val();
+            var password2 = $("#adminPassword2").val();
+            var reg = /^[0-9a-zA-Z]+$/;
+            if (password1 == "" || password2 == "") {
+                $("#adminPasswordDiv").html("密码不能为空！");
+
+            } else if (!reg.test(password1)) {
+                $("#adminPasswordDiv").html("密码必须是数字和字母组成的10--16位数!");
+            } else if (password1.length < 10) {
+                $("#adminPasswordDiv").html("密码必须是数字和字母组成的10--16位数!");
+
+            } else if (password1 != password2) {
+
+                $("#adminPasswordDiv").html("两次密码输入不一样，请重新输入！");
+
+            } else {
+                $("#adminPasswordDiv").html("");
+                open2=true;
+            }
+
+        });
+        // 手机
+        $("#phone").blur(function() {
+            var phone = $("#phone").val();
+            var reg = /^1\d{10}$/;
+            if (phone == null || phone == "") {
+                $("#phoneDiv").html("手机号码不能为空!");
+            } else if (!reg.test(phone)) {
+                $("#phoneDiv").html("手机号码格式不正确!");
+
+            } else {
+                $("#phoneDiv").html("");
+                open3=true;
+            }
+
+        });
+
+        //表单信息正确才可以提交
+
+        $("#submit").click(function () {
+
+
+            if(open==true&&open2==true&&open3==true){
+                return true;
+
+            }else{
+
+                return false;
+            }
+
+        })
+
+
+    });
+
+
 
 
 </script>

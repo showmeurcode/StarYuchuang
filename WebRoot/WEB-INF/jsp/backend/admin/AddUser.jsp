@@ -45,7 +45,7 @@
                 <div class="form-group">
                     <label class="col-sm-3 control-label">用户名：</label>
                     <div class="col-sm-8">
-                        <input id="adminName" name="adminName" class="form-control" required="required" placeholder="用户名" type="text"><font color="#c00fff">*</font>
+                        <input id="adminName" name="adminName" class="form-control" required="required" placeholder="用户名" type="text" ><font color="#c00fff">*</font>
                         <div id="adminNameDiv" style="display: inline; color:red"></div>
                     </div>
 
@@ -61,7 +61,7 @@
                 <div class="form-group">
                     <label class="col-sm-3 control-label">确认密码：</label>
                     <div class="col-sm-8">
-                        <input id="adminPassword2" name="adminPassword2" class="form-control" placeholder="确认密码" type="password"required="required" ><font color="#c00fff">*</font>
+                        <input id="adminPassword2" name="adminPassword2" class="form-control" placeholder="确认密码" type="password"required="required" pattern="^\w{10,16}$" maxlength="16"><font color="#c00fff">*</font>
                         <div id="adminPasswordDiv" style="display: inline; color:red"></div>
                         <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 请再次输入您的密码（密码必须是数字和字母组成的10--16位数!）</span>
                     </div>
@@ -70,7 +70,7 @@
                 <div class="form-group">
                     <label class="col-sm-3 control-label">手机：</label>
                     <div class="col-sm-8">
-                        <input id="phone" name="phone" class="form-control" type="text" aria-required="true" aria-invalid="false" class="valid" required="required"><font color="#c00fff">*</font>
+                        <input id="phone" name="phone" class="form-control" type="text" aria-required="true" aria-invalid="false" class="valid" required="required" maxlength="11"><font color="#c00fff">*</font>
                         <div id="phoneDiv" style="display: inline; color:red"></div>
                     </div>
 
@@ -87,7 +87,8 @@
                 </div>
                 <div class="form-group">
                     <div class="col-sm-8 col-sm-offset-3">
-                        <button class="btn btn-primary" type="submit" id="submit" href="#" >提交</button>
+                        <button class="btn btn-primary" type="submit" id="submit" href="#" >提交</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <button class="btn btn-primary" type="submit" id="back" onclick="history.go(-1)">返回</button>
                     </div>
                 </div>
             </form>
@@ -106,9 +107,9 @@
 <script type="text/javascript">
 
     $(function () {
-        var open=1;
-        var open1=1;
-        var open2=1;
+        var open=false;
+        var open2=false;
+        var open3=false;
 
         // 用户名
 
@@ -121,7 +122,7 @@
                     return;
                 } else {
                     $("#adminNameDiv").html("");
-                    open=0;
+                    open=true;
 
                 }
             });
@@ -145,7 +146,7 @@
 
             } else {
                 $("#adminPasswordDiv").html("");
-                open1=0;
+                open2=true;
             }
 
         });
@@ -160,28 +161,25 @@
 
                 } else {
                     $("#phoneDiv").html("");
-                    open2=0;
+                    open3=true;
                 }
 
             });
 
         //表单信息正确才可以提交
 
-            $("#submit").blur(function () {
-                var admin = $("#adminNameDiv").val();
-                var adminPassword= $("#adminPasswordDiv").val();
-                var phone = $("#phoneDiv").val();
+            $("#submit").click(function () {
 
-                if(admin==adminPassword==phone==""){
 
-                    $('#submit').attr("disabled",false);
+                if(open==true&&open2==true&&open3==true){
+                    return true;
 
                 }else{
-                    $('#submit').attr("disabled",true);
+
+                    return false;
                 }
 
             })
-
 
 
     });

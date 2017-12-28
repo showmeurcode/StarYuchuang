@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -74,7 +75,7 @@
                                             <td>${adminUserList.adminPassword}</td>
                                             <td>${adminUserList.phone}</td>
                                             <td>${adminUserList.jurisdiction}</td>
-                                            <td>${adminUserList.registerDate}</td>
+                                            <td><fmt:formatDate value="${adminUserList.registerDate}" pattern="yyyy-MM-dd"/></td>
 
                                             <td><a class="btn btn-primary btn-sm" href="#" onclick="edittype('${adminUserList.id}')">编辑</a>&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-danger btn-sm" href="#" onclick="del('${adminUserList.id}')">删除</a>&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-primary btn-sm" href="#" onclick="stop('${adminUserList.id}')">停用</a></td>
 
@@ -185,7 +186,7 @@
             title : '用户信息修改',
             maxmin : true,
             shadeClose : false, //点击遮罩关闭层
-            area : [ '700px', '600px' ],
+            area : [ '800px', '550px' ],
             content : ['${pageContext.request.contextPath}/adminuser/upeateUserbyid?id='+ id ],//此处 'no' 表示无下拉框选择
             end: function(){
                 var table = $('.dataTables-example').DataTable();
@@ -203,7 +204,7 @@
             title : '用户停用',
             maxmin : true,
             shadeClose : false, //点击遮罩关闭层
-            area : [ '700px', '600px' ],
+            area : [ '800px', '550px' ],
             content : ['${pageContext.request.contextPath}/adminuser/upeateUserbyid?id='+ id ],//此处 'no' 表示无下拉框选择
             end: function(){
                 var table = $('.dataTables-example').DataTable();
