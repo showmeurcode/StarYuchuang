@@ -188,7 +188,7 @@
             title : '用户信息修改',
             maxmin : true,
             shadeClose : false, //点击遮罩关闭层
-            area : [ '700px', '600px' ],
+            area : [ '800px', '550px' ],
             content : ['${pageContext.request.contextPath}/devuser/upeateUserbyid?id='+ id ],//此处 'no' 表示无下拉框选择
             end: function(){
                 var table = $('.dataTables-example').DataTable();
@@ -206,7 +206,7 @@
             title : '用户停用',
             maxmin : true,
             shadeClose : false, //点击遮罩关闭层
-            area : [ '700px', '600px' ],
+            area : [ '800px', '550px' ],
             content : ['${pageContext.request.contextPath}/devuser/upeateUserbyid?id='+ id ],//此处 'no' 表示无下拉框选择
             end: function(){
                 var table = $('.dataTables-example').DataTable();

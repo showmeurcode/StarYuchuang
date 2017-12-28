@@ -56,7 +56,7 @@
                 <div class="form-group">
                     <label class="col-sm-3 control-label">用户名：</label>
                     <div class="col-sm-8">
-                        <input id="adminName" name="adminName" class="form-control" type="text" value="${adminUser.adminName}">
+                        <input id="adminName" name="adminName" class="form-control" type="text" value="${adminUser.adminName}" maxlength="10">
                     </div>
 
         </div>

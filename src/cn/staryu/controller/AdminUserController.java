@@ -60,7 +60,7 @@ public class AdminUserController {
     @RequestMapping("/adduser")//添加用户
     public Object addUser(@ModelAttribute("adminUser") AdminUser adminUser){
 
-        return "backend/AddUser";
+        return "backend/admin/AddUser";
 
     }
     @RequestMapping("/usersave")//保存用户
@@ -73,13 +73,13 @@ public class AdminUserController {
 
             if(result>0){
 
-                return "backend/addUsersave";
+                return "backend/admin/addUsersave";
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return "backend/AddUser";
+        return "backend/admin/AddUser";
 
 
     }
@@ -118,7 +118,7 @@ public class AdminUserController {
             e.printStackTrace();
         }
 
-        return "backend/updateUser";
+        return "backend/admin/updateUser";
 
     }
     @RequestMapping("/userupdatesave")//修改数据保存
@@ -134,7 +134,7 @@ public class AdminUserController {
 
             if(result>0){
 
-                return "backend/update";
+                return "backend/admin/update";
 
             }
 
@@ -142,7 +142,7 @@ public class AdminUserController {
             e.printStackTrace();
         }
 
-        return "backend/updateUser";
+        return "backend/admin/updateUser";
 
     }
 
@@ -181,7 +181,7 @@ public class AdminUserController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return "backend/CustomerManage";
+        return "backend/admin/CustomerManage";
 
     }
 

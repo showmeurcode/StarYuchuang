@@ -45,7 +45,7 @@
                 <div class="form-group">
                     <label class="col-sm-3 control-label">用户名：</label>
                     <div class="col-sm-8">
-                        <input id="adminName" name="adminName" class="form-control" required="required" placeholder="用户名" type="text" ><font color="#c00fff">*</font>
+                        <input id="adminName" name="adminName" class="form-control" required="required" placeholder="用户名" type="text" maxlength="10"><font color="#c00fff">*</font>
                         <div id="adminNameDiv" style="display: inline; color:red"></div>
                     </div>
 
@@ -88,7 +88,7 @@
                 <div class="form-group">
                     <div class="col-sm-8 col-sm-offset-3">
                         <button class="btn btn-primary" type="submit" id="submit" href="#" >提交</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <button class="btn btn-primary" type="submit" id="back" onclick="history.go(-1)">返回</button>
+                        <button class="btn btn-primary" type="button" id="back" onclick="history.go(-1)">返回</button>
                     </div>
                 </div>
             </form>

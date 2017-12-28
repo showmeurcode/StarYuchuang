@@ -56,7 +56,7 @@
                 <div class="form-group">
                     <label class="col-sm-3 control-label">用户名：</label>
                     <div class="col-sm-8">
-                        <input id="adminName" name="adminName" class="form-control" type="text" value="${devUser.devName}">
+                        <input id="adminName" name="adminName" class="form-control" type="text" value="${devUser.devName}" maxlength="10" required="required">
                     </div>
 
         </div>
@@ -64,14 +64,14 @@
         <div class="form-group">
             <label class="col-sm-3 control-label">密码：</label>
             <div class="col-sm-8">
-                <input id="adminPassword" name="adminPassword" class="form-control" type="text" value="${devUser.devPassword}">
+                <input id="adminPassword" name="adminPassword" class="form-control" type="text" value="${devUser.devPassword}"maxlength="16" required="required">
             </div>
 
         </div>
         <div class="form-group">
             <label class="col-sm-3 control-label">确认密码：</label>
             <div class="col-sm-8">
-                <input id="adminPassword2" name="adminPassword2" class="form-control" type="text" value="${devUser.devPassword}" >
+                <input id="adminPassword2" name="adminPassword2" class="form-control" type="text" value="${devUser.devPassword}" maxlength="16" required="required">
                 <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 请再次输入您的密码</span>
             </div>
             <font color="#c00fff">*</font>
@@ -80,7 +80,7 @@
         <div class="form-group">
             <label class="col-sm-3 control-label">手机：</label>
             <div class="col-sm-8">
-                <input id="phone" name="phone" class="form-control" type="text" value="${devUser.phone}" aria-required="true" aria-invalid="false" class="valid">
+                <input id="phone" name="phone" class="form-control" type="text" value="${devUser.phone}" aria-required="true" aria-invalid="false" class="valid" maxlength="11" required="required">
             </div>
             <font color="#c00fff">*</font>
             <div id="phoneDiv" style="display: inline; color:red"></div>
@@ -88,7 +88,7 @@
                 <div class="form-group">
                     <label class="col-sm-3 control-label">QQ：</label>
                     <div class="col-sm-8">
-                        <input id="qq" name="qq" class="form-control" type="text" aria-required="true" value="${devUser.qq}" aria-invalid="false" class="valid">
+                        <input id="qq" name="qq" class="form-control" type="text" aria-required="true" value="${devUser.qq}" aria-invalid="false" class="valid" maxlength="10" required="required">
                     </div>
                     <font color="#c00fff">*</font>
                     <div id="qqDiv" style="display: inline; color:red"></div>
@@ -96,7 +96,7 @@
                 <div class="form-group">
                     <label class="col-sm-3 control-label">邮箱：</label>
                     <div class="col-sm-8">
-                        <input id="devEmail" name="devEmail" class="form-control" type="devEmail" aria-required="true" value="${devUser.devEmail}" aria-invalid="false" class="valid">
+                        <input id="devEmail" name="devEmail" class="form-control" type="devEmail" aria-required="true" value="${devUser.devEmail}" aria-invalid="false" class="valid" maxlength="20" required="required">
                     </div>
                     <font color="#c00fff">*</font>
                     <div id="devEmailDiv" style="display: inline; color:red"></div>
@@ -115,7 +115,7 @@
             <div class="col-sm-8 col-sm-offset-3">
                 <div class="checkbox">
                     <label>
-                        <input type="checkbox" class="checkbox" id="agree" name="agree"> 我已经认真阅读并同意《管理员使用协议》
+                        <input type="checkbox" class="checkbox" id="agree" name="agree" required="required"> 我已经认真阅读并同意《用户使用协议》
                     </label>
                 </div>
             </div>
@@ -123,7 +123,7 @@
         <div class="form-group">
             <div class="col-sm-8 col-sm-offset-3">
                 <button class="btn btn-primary" type="submit" id="submit" href="#">保存</button>&nbsp;&nbsp;&nbsp;&nbsp;
-                <button class="btn btn-primary" type="back" id="back" href="#">返回</button>
+                <button class="btn btn-primary" type="button" id="back" onclick="history.go(-1)">返回</button>
 
             </div>
         </div>
