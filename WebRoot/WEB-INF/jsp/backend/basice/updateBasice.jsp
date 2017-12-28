@@ -33,7 +33,7 @@
 
 <div class="x_content">
 
-    <form id="appaddform" class="form-horizontal form-label-left"
+    <form id="addform" class="form-horizontal form-label-left"
           method="post" action="${pageContext.request.contextPath }/basicsetting/changeBasicsetting">
 
         <p>请填写信息
@@ -103,9 +103,14 @@
 <script type="text/javascript" src="${pageContext.request.contextPath }/statics/js/jquery-1.4.4.min.js"></script>
 <script type="text/javascript">
     var flag = false;
+    var flag2 = false;
+    var flag3 = false;
+
 
     $("#send1").click(function () {
-        if (flag) {
+        if (flag && flag2 && flag3) {
+            $("#addform").submit();
+
             //        var bpar=$("#appaddform").serialize();
 
             <%--$.ajax({--%>
@@ -165,7 +170,7 @@
         $("#adress").blur(function () {
             var adress=$("#adress").val();
             if (adress == "" || adress == null) {
-                flag = false;
+                flag2 = false;
                 $("#yzaddess").html("域名地址不能为空")
             }  else {
                 $.ajax({
@@ -176,10 +181,10 @@
                     success:function (data) {
                         if (data.status == "success") {
                             $("#yzaddess").html("网络地址可以使用");
-                            flag = true;
+                            flag2 = true;
                         } else {
                             $("#yzaddess").html("网络地址已存在");
-                            flag = false;
+                            flag2 = false;
                         }
 
                     },
@@ -195,11 +200,11 @@
         $("#describe").blur(function () {
             var describe=$("#describe").val();
             if (describe == "" || describe == null) {
-                flag = false;
+                flag3 = false;
                 $("#yztext").html("站点描述不能为空")
             } else {
                 $("#yztext").html("");
-                flag = true;
+                flag3 = true;
             }
         });
 

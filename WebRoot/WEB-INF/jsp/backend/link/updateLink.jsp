@@ -33,7 +33,7 @@
 
 <div class="x_content">
 
-    <form id="appaddform" class="form-horizontal form-label-left"
+    <form id="addform" class="form-horizontal form-label-left"
           method="post" action="${pageContext.request.contextPath }/linkmanager/changeLinkmanager">
 
         <p>请填写信息
@@ -91,9 +91,13 @@
 <script type="text/javascript" src="${pageContext.request.contextPath }/statics/js/jquery-1.4.4.min.js"></script>
 <script type="text/javascript">
     var flag = false;
+    var flag2 = false;
+
 
     $("#send1").click(function () {
-        if (flag) {
+        if (flag && flag2) {
+            $("#addform").submit();
+
             <%--var bpar=$("#appaddform").serialize();--%>
 
             <%--$.ajax({--%>
@@ -128,19 +132,57 @@
             flag = false;
             $("#yzname").html("网站名称不能为空")
         } else {
-            $("#yzname").html("");
-            flag = true;
+            $.ajax({
+                type:"POST",
+                url:"${pageContext.request.contextPath}/linkmanager/nameSole.json",
+                data:"name="+name,
+                dataType:"json",
+                success:function (data) {
+                    if (data.status == "success") {
+                        $("#yzname").html("网站名称可以使用");
+                        flag = true;
+                    } else {
+                        $("#yzname").html("网站名称已存在");
+                        flag = false;
+                    }
+
+                },
+                error:function (XMLHttpRequest, textStatus, errorThrown) {
+                    alert("XMLHttpRequest.status："+XMLHttpRequest.status);
+                    alert("XMLHttpRequest.readyState："+XMLHttpRequest.readyState);
+                    alert("textStatus："+textStatus);
+                }
+            });
         }
     });
 
     $("#link").blur(function () {
         var link=$("#link").val();
         if (link == "" || link == null) {
-            flag = false;
+            flag2 = false;
             $("#yzlink").html("网站链接不能为空")
         } else {
-            $("#yzlink").html("");
-            flag = true;
+            $.ajax({
+                type:"POST",
+                url:"${pageContext.request.contextPath}/linkmanager/linkSole.json",
+                data:"name="+name,
+                dataType:"json",
+                success:function (data) {
+                    if (data.status == "success") {
+                        $("#yzlink").html("网站链接可以使用");
+                        flag2 = true;
+                    } else {
+                        $("#yzlink").html("网站链接已存在");
+                        flag2 = false;
+                    }
+
+                },
+                error:function (XMLHttpRequest, textStatus, errorThrown) {
+                    alert("XMLHttpRequest.status："+XMLHttpRequest.status);
+                    alert("XMLHttpRequest.readyState："+XMLHttpRequest.readyState);
+                    alert("textStatus："+textStatus);
+                }
+            });
         }
     });
 

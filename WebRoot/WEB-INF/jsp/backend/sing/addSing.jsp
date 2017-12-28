@@ -131,10 +131,17 @@
 <script type="text/javascript" src="${pageContext.request.contextPath }/statics/js/jquery-1.4.4.min.js"></script>
 <script type="text/javascript">
     var flag = false;
+    var flag2 = false;
+    var flag3 = false;
+    var flag4 = false;
+    var flag5 = false;
+
 
     $("#send1").click(function () {
 
-        if (flag) {
+        if (flag && flag2 && flag3 && flag4 && flag5) {
+            $("#addform").submit();
+
 //            var bpar=$("#appaddform").serialize();
 //        alert(bpar);
             <%--$.ajax({--%>
@@ -177,44 +184,44 @@
     $("#name").blur(function () {
         var name=$("#name").val();
         if (name == "" || name == null) {
-            flag = false;
+            flag2 = false;
             $("#yzname").html("姓名不能为空")
         } else {
             $("#yzname").html("");
-            flag = true;
+            flag2 = true;
         }
     });
 
     $("#age").blur(function () {
         var age=$("#age").val();
         if (age == "" || age == null) {
-            flag = false;
+            flag3 = false;
             $("#yzage").html("年龄不能为空")
         } else {
             $("#yzage").html("");
-            flag = true;
+            flag3 = true;
         }
     });
 
     $("#email").blur(function () {
         var email=$("#email").val();
         if (email == "" || email == null) {
-            flag = false;
+            flag4 = false;
             $("#yzemail").html("邮箱不能为空")
-        } else {
+        }else {
             $("#yzemail").html("");
-            flag = true;
+            flag4 = true;
         }
     });
 
     $("#phone").blur(function () {
         var phone=$("#phone").val();
         if (phone == "" || phone == null) {
-            flag = false;
+            flag5 = false;
             $("#yzphone").html("电话不能为空")
         } else {
             $("#yzphone").html("");
-            flag = true;
+            flag5 = true;
         }
     });
 

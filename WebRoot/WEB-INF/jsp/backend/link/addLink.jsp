@@ -33,7 +33,7 @@
 
 <div class="x_content">
 
-    <form id="appaddform" class="form-horizontal form-label-left"
+    <form id="addform" class="form-horizontal form-label-left"
           method="post" action="${pageContext.request.contextPath }/linkmanager/addLinkmanager">
 
         <p>请填写信息
@@ -82,9 +82,12 @@
 <script type="text/javascript" src="${pageContext.request.contextPath }/statics/js/jquery-1.4.4.min.js"></script>
 <script type="text/javascript">
     var flag = false;
+    var flag2=false;
 
     $("#send1").click(function () {
-        if (flag) {
+        if (flag && flag2) {
+            $("#addform").submit();
+
             <%--var bpar=$("#appaddform").serialize();--%>
 
             <%--$.ajax({--%>
@@ -148,7 +151,7 @@
     $("#link").blur(function () {
         var link=$("#link").val();
         if (link == "" || link == null) {
-            flag = false;
+            flag2 = false;
             $("#yzlink").html("网站链接不能为空")
         } else {
             $.ajax({
@@ -159,10 +162,10 @@
                 success:function (data) {
                     if (data.status == "success") {
                         $("#yzlink").html("网站链接可以使用");
-                        flag = true;
+                        flag2 = true;
                     } else {
                         $("#yzlink").html("网站链接已存在");
-                        flag = false;
+                        flag2 = false;
                     }
 
                 },

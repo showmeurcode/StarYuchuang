@@ -4,7 +4,7 @@
     <title>Title</title>
 </head>
 <body>
-修改成功！！
+保存成功！！
 </body>
 <script type="text/javascript" src="${pageContext.request.contextPath }/statics/js/jquery-1.4.4.min.js"></script>
 <script src="${pageContext.request.contextPath}/statics/js/plugins/layer/layer.js"></script>
